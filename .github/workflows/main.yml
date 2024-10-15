@@ -33,3 +33,7 @@ jobs:
           coverage: none
       - name: Install composer dependencies
         run: composer install -n --prefer-dist
+      - name: Install database tables
+        run: php artisan migrate
+      - name: Fill database tables
+        run: php artisan db:seed
