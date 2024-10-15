@@ -5,51 +5,12 @@ on: # specify the build to trigger the automated ci/cd
     branches:
       - "main"
 jobs:
-  backend:
+  docker:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Cursus-api
-    services:
-      mysql:
-        image: mysql:8
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        options: --health-cmd="mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 5
-    env:
-      DB_CONNECTION: mysql
-      DB_HOST: localhost
-      DB_PORT: 3306
-      DB_DATABASE: laravel
-      DB_USERNAME: root
-      DB_PASSWORD:
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          coverage: none
-      - name: Install composer dependencies
-        run: composer install -n --prefer-dist
-      - name: Install database tables
-        run: php artisan migrate
-      - name: Fill database tables
-        run: php artisan db:seed
-  tests:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Tests-api
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: 17
-      - name: Install dependencies
-        run: npm install
-      - name: Run test
-        run: npm run test
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Start containers
+      run: docker-compose -f "docker-compose.yml" up -d --build
