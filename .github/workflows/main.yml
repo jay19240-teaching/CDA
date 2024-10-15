@@ -1,0 +1,35 @@
+name: node_app
+
+on: # specify the build to trigger the automated ci/cd
+    push:
+        branches:
+            - "main"
+jobs:
+  backend-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Cursus-api
+    services:
+      mysql:
+        image: mysql:8
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: test
+    env:
+      DB_CONNECTION=mysql
+      DB_HOST=localhost
+      DB_PORT=3306
+      DB_DATABASE=laravel
+      DB_USERNAME=root
+      DB_PASSWORD=test
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+      - name: Install composer dependencies
+        run: composer install -n --prefer-dist
