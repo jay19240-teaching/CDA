@@ -16,11 +16,11 @@ jobs:
     # - name: Start containers
     #   run: docker-compose -f "docker-compose.yml" up --build
 
-    # - name: Install node
-    #   uses: actions/setup-node@v1
-    #   with:
-    #     node-version: 17.x
-    # - name: Install dependencies
-    #   run: npm install
-    # - name: Run tests
-    #   run: npm run test
+    - name: Install node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 17.x
+    - name: Install dependencies
+      run: npm install
+    - name: Run tests
+      run: npm run test
