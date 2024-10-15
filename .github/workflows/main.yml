@@ -23,7 +23,7 @@ jobs:
       DB_PORT=3306
       DB_DATABASE=laravel
       DB_USERNAME=root
-      DB_PASSWORD=test
+      DB_PASSWORD=${{ secrets.DB_PASSWORD }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup PHP
