@@ -5,7 +5,7 @@ on: # specify the build to trigger the automated ci/cd
     branches:
       - "main"
 jobs:
-  backend-test:
+  backend:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -37,3 +37,18 @@ jobs:
         run: php artisan migrate
       - name: Fill database tables
         run: php artisan db:seed
+  tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Tests-api
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          version: 17
+      - name: Install dependencies
+        run: npm install
+      - name: Run test
+        run: npm run test
