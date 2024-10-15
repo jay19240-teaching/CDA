@@ -20,6 +20,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 17.x
+    - name: Change Directory
+      run: cd Tests-api
     - name: Install dependencies
       run: npm install
     - name: Run tests
