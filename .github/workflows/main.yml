@@ -16,13 +16,20 @@ jobs:
     # - name: Start containers
     #   run: docker-compose -f "docker-compose.yml" up --build
 
-    - name: Install node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 17.x
-    - name: Change Directory
-      run: cd Tests-api
-    - name: Install dependencies
-      run: npm install
-    - name: Run tests
-      run: npm run test
+  tests:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    needs: [docker]
+
+    defaults:
+      run:
+        working-directory: Tests-api
+    steps:
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17.x
+      - name: Install dependencies
+        run: npm install
+      - name: Run tests
+        run: npm run test
