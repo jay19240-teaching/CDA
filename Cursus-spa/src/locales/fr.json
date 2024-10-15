@@ -1,0 +1,23 @@
+{
+  "CREATURE": {
+    "NAME": "Nom de la créature",
+    "DELETE": "Supprimer une créature",
+    "EDIT": "Éditer une créature",
+    "CREATE": "Créer une créature",
+    "DELETED": "Créature supprimé",
+    "EDITED": "Créature édité",
+    "CREATED": "Créature crée"
+  },
+  "ENUMS": {
+    "CREATURE_TYPE": {
+      "ELECTRIK": "Electrique",
+      "WATER": "Eau",
+      "FIRE": "Feu"
+    },
+    "CREATURE_RACE": {
+      "MOUSE": "Souris",
+      "DRAGON": "Dragon",
+      "PLANT": "Plante"
+    }
+  }
+}
