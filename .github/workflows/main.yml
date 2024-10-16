@@ -16,6 +16,9 @@ jobs:
       uses: actions/checkout@v1
     - name: Install Docker
       uses: hoverkraft-tech/compose-action@v2.0.1
+    - name: Sleep for 1 minutes
+      run: sleep 60s
+      shell: bash
     - name: Database seeding
       run: docker exec laravel-docker bash -c "php artisan migrate:install"
     - name: Install node
