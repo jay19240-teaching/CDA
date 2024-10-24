@@ -50,12 +50,21 @@ class Creature extends Model
         return $this->belongsToMany(Weapon::class);
     }
 
-    static public function search(string $name = null, string $minPv = null, string $maxPv = null, int $page = null, int $limit = null)
-    {
+    static public function search(
+        string $name = null,
+        string $minPv = null,
+        string $maxPv = null,
+        array $types = null,
+        array $races = null,
+        int $page = null,
+        int $limit = null,
+        string $orderBy = null,
+        string $orderType = null
+    ) {
         $query = self::query();
 
         if ($name) {
-            $query->where('name', $name);
+            $query->where('name', 'like', $name . '%');
         }
 
         if (is_numeric($minPv)) {
@@ -66,8 +75,19 @@ class Creature extends Model
             $query->where('pv', '<', $maxPv);
         }
 
+        if ($types && count($types) > 0) {
+            $query->whereIn('type', $types);
+        }
+
+        if ($races && count($races) > 0) {
+            $query->whereIn('race', $races);
+        }
+
         $totalResults = $query->count();
-        $query->orderBy('id', 'ASC');
+ 
+        if ($orderBy && $orderType) {
+            $query->orderBy($orderBy, $orderType);
+        }
 
         if ($page && $limit) {
             $query->skip(($page - 1) * $limit)->take($limit);

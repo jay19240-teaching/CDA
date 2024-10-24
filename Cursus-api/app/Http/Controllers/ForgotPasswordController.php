@@ -19,9 +19,7 @@ class ForgotPasswordController extends Controller
             $request->only('email')
         );
 
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with(['status' => __($status)])
-            : back()->withErrors(['email' => __($status)]);
+        return $status === Password::PASSWORD_RESET ? response()->json(['success' => 'success']) : response()->json(['failed' => 'failed'], 500);
     }
 
     public function reset(Request $request) {
@@ -39,8 +37,6 @@ class ForgotPasswordController extends Controller
             event(new PasswordReset($user));
         });
 
-        return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
+        return $status === Password::PASSWORD_RESET ? response()->json(['success' => 'success']) : response()->json(['failed' => 'failed'], 500);
     }
 }

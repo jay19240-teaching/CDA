@@ -2,6 +2,6 @@
 
 <template>
   <div>
-    Contact works !
+    Settings works !
   </div>
 </template>

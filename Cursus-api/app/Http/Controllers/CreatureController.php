@@ -16,49 +16,59 @@ class CreatureController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth:sanctum')
-        // ->only([
-        //     'destroy',
-        //     'store',
-        //     'update',
-        //     'show'
-        // ]);
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return response()->json(Creature::all());
     }
 
-    /**
-     * Display a listing of user resource.
-     */
     public function indexByUser(User $user = null)
     {
         $creatures = DB::table('creatures')->where('user_id', '=', $user->id)->get();
         return response()->json($creatures);
     }
 
-    public function getWeapons(Request $request, string $id) {
+    public function getWeapons(Request $request, string $id)
+    {
         $creature = Creature::find($id);
         return response()->json($creature->weapons);
     }
 
-    /**
-     * Display a paginate listing of the resource.
-     */
+    public function getTypes()
+    {
+        return response()->json(CreatureTypeEnum::values());
+    }
+
+    public function getRaces()
+    {
+        return response()->json(CreatureRaceEnum::values());
+    }
+
     public function paginate(Request $request)
     {
         $page = $request->query('page', 1);
         $name = $request->query('name');
         $minPv = $request->query('minPv');
         $maxPv = $request->query('maxPv');
-        $limit = 3;
+        $types = $request->query('types');
+        $races = $request->query('races');
+        $orderBy = $request->query('orderBy');
+        $orderType = $request->query('orderType');
+        $limit = $request->query('limit', 3);
 
-        $results = Creature::search($name, $minPv, $maxPv, $page, $limit);
+        $results = Creature::search(
+            name: $name,
+            minPv: $minPv,
+            maxPv: $maxPv,
+            types: $types,
+            races: $races,
+            page: $page,
+            limit: $limit,
+            orderBy: $orderBy,
+            orderType: $orderType
+        );
+
         $maxPages = ceil($results['totalResults'] / $limit);
 
         return response()->json([
@@ -68,9 +78,6 @@ class CreatureController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $formFields = $request->validate([
@@ -99,17 +106,11 @@ class CreatureController extends Controller
         return response()->json($creature);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Creature $creature)
     {
         return response()->json($creature);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Creature $creature)
     {
         $this->authorize('update', $creature);
@@ -142,9 +143,6 @@ class CreatureController extends Controller
         return response()->json($creature);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Creature $creature)
     {
         $this->authorize('destroy', $creature);

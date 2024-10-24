@@ -1,10 +1,10 @@
-import PublicLayout from './Layout.vue';
 import Home from './Home.vue';
-import Contact from './Contact.vue';
+import Settings from './Settings.vue';
 import Creatures from './creatures/Creatures.vue';
 import CreatureCreate from './creatures/CreatureCreate.vue';
 import CreatureEdit from './creatures/CreatureEdit.vue';
+import CreatureShow from './creatures/CreatureShow.vue';
 
 export {
-  PublicLayout, Home, Contact, Creatures, CreatureCreate, CreatureEdit
+  Home, Settings, Creatures, CreatureCreate, CreatureEdit, CreatureShow
 }

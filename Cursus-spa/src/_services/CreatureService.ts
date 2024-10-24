@@ -12,6 +12,11 @@ export interface PaginateParams {
   name?: string;
   minPv?: number;
   maxPv?: number;
+  types?: any;
+  races?: any;
+  orderBy?: string;
+  orderType?: string;
+  limit?: number;
 };
 
 export async function getCreatures(): Promise<Creature[]> {
@@ -47,4 +52,14 @@ export async function updateCreature(creature: Creature): Promise<any> {
 
 export async function deleteCreature(id: number): Promise<any> {
   return await Axios.delete('/creatures/' + id);
+}
+
+export async function getTypes(): Promise<[]> {
+  const res = await Axios.get('/creatures-types');
+  return res.data;
+}
+
+export async function getRaces(): Promise<[]> {
+  const res = await Axios.get('/creatures-races');
+  return res.data;
 }

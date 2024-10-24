@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CreatureController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Register2Controller;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\MailTesterController;
 
@@ -10,6 +11,8 @@ use App\Http\Controllers\MailTesterController;
 // REGISTER
 //
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
+Route::post('/register2', [Register2Controller::class, 'register'])->name('register2');
+Route::post('/verification', [Register2Controller::class, 'verification'])->name('verification');
 
 //
 // FORGOT PASSWORD
@@ -38,13 +41,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
 //
 // CREATURES
 //
-
 Route::get('/creatures/{id}/weapons', [CreatureController::class, 'getWeapons'])->name('creatures.getWeapons');
 
 Route::get('/creatures', [CreatureController::class, 'index'])->name('creatures.list');
 Route::get('/creatures-paginate', [CreatureController::class, 'paginate'])->name('creatures.paginate');
 Route::get('/creatures/{creature}', [CreatureController::class, 'show'])->name('creatures.show');
 Route::get('/creatures-by-user/{user}', [CreatureController::class, 'indexByUser'])->name('creatures.listByUser');
+
+Route::get('/creatures-races', [CreatureController::class, 'getRaces'])->name('creatures.races');
+Route::get('/creatures-types', [CreatureController::class, 'getTypes'])->name('creatures.types');
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/creatures', [CreatureController::class, 'store'])->name('creatures.store');

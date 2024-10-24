@@ -33,7 +33,7 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')],
             'password' => ['required', 'confirmed', Password::defaults()]
         ]);
-        
+
         $user = new User();
         $user->fill($formFields);
         $user->save();
