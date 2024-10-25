@@ -93,9 +93,9 @@ class CreatureController extends Controller
         ]);
 
         $creature = new Creature();
-        $creature->fill($formFields);
         $creature->user_id = Auth::user()->id;
-
+        $creature->fill($formFields);
+        
         if ($request->file('avatar_blob')) {
             $fileName = time() . '_' . $request->avatar_blob->getClientOriginalName();
             $creature->avatar = $fileName;
