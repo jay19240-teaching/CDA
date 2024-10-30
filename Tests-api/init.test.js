@@ -151,9 +151,7 @@ describe("Admin Creatures DELETE", () => {
 // ------------------------------------------------------------------------------
 
 async function login(user, credentials) {
-  await Axios.get('/logout', {
-    baseURL: 'http://localhost:8000'
-  });
+  await Axios.get('/logout');
 
   const res = await Axios.get('/sanctum/csrf-cookie', {
     baseURL: 'http://localhost:8000'
@@ -165,8 +163,7 @@ async function login(user, credentials) {
   Axios.defaults.headers.common['Referer'] = 'http://localhost:8000';
 
   const auth = await Axios.post('/authenticate', credentials, {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    baseURL: 'http://localhost:8000',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   });
 
   Axios.defaults.headers.cookie = auth.headers['set-cookie'];
