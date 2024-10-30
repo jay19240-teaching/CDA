@@ -7,8 +7,7 @@ export async function login(credentials: { email: string, password: string }): P
   });
 
   const res = await Axios.post('/authenticate', credentials, {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    baseURL: 'http://localhost:8000'
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   });
 
   const userStore = useUserStore();
@@ -20,9 +19,7 @@ export async function login(credentials: { email: string, password: string }): P
 }
 
 export async function logout() {  
-  await Axios.get('/logout', {
-    baseURL: 'http://localhost:8000'
-  });
+  await Axios.get('/logout');
 
   const userStore = useUserStore();
   userStore.clearUser();

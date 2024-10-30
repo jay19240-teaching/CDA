@@ -3,16 +3,23 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CreatureController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\Register2Controller;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\MailTesterController;
+use App\Http\Controllers\AuthController;
+
+//
+// AUTH
+//
+Route::middleware(['web'])->group(function () {
+    Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 //
 // REGISTER
 //
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
-Route::post('/register2', [Register2Controller::class, 'register'])->name('register2');
-Route::post('/verification', [Register2Controller::class, 'verification'])->name('verification');
+Route::post('/verification', [RegisterController::class, 'verification'])->name('verification');
 
 //
 // FORGOT PASSWORD

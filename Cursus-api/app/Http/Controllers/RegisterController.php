@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisterEmail;
 use Illuminate\Support\Str;
 
-class Register2Controller extends Controller
+class RegisterController extends Controller
 {
     public function register(Request $request)
     {
@@ -35,7 +35,11 @@ class Register2Controller extends Controller
             'token' => 'required|string|min:40|exists:users'
         ]);
 
-        $user = User::where('email', '=', $formFields['email'])->where('token', '=', $formFields['token'])->first();
+        $user = User::where('email', '=', $formFields['email'])
+            ->where('token', '=', $formFields['token'])
+            ->where('email_verified_at', '=', null)
+            ->first();
+
         if (!$user)
         {
             return response()->json(['failed' => 'failed', 400]);
