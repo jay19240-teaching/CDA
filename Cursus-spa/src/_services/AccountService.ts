@@ -2,6 +2,10 @@ import Axios from './CallerService';
 import { useUserStore } from '@/stores/User';
 
 export async function login(credentials: { email: string, password: string }): Promise<void> {
+  await Axios.get('/sanctum/csrf-cookie', {
+    baseURL: 'http://localhost:8000'
+  });
+
   const res = await Axios.post('/authenticate', credentials, {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     baseURL: 'http://localhost:8000'
@@ -15,10 +19,14 @@ export async function login(credentials: { email: string, password: string }): P
   });
 }
 
-export function logout() {
+export async function logout() {  
+  await Axios.get('/logout', {
+    baseURL: 'http://localhost:8000'
+  });
+
   const userStore = useUserStore();
   userStore.clearUser();
-  
+
   const cookies = document.cookie.split(";");
   for (let i = 0; i < cookies.length; i++) {
     const cookie = cookies[i];

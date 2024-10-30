@@ -1,4 +1,5 @@
 import { CreatureType, CreatureRace } from './Enums';
+import { type User } from './User';
 
 export interface Creature {
     id: number;
@@ -13,4 +14,5 @@ export interface Creature {
     avatar?: string;
     avatar_blob?: File;
     user_id?: number;
+    user?: User;
 };

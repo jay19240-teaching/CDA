@@ -29,7 +29,7 @@ export async function paginateCreatures(params: PaginateParams): Promise<Creatur
   return res.data;
 }
 
-export async function getCreature(id: number): Promise<Creature> {
+export async function getCreature(id: string): Promise<Creature> {
   const res = await Axios.get('/creatures/' + id);
   return res.data;
 }

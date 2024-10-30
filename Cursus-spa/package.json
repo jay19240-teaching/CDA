@@ -11,9 +11,13 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "animate.css": "^4.1.1",
+    "ant-design-vue": "^4.2.5",
     "axios": "^1.7.5",
     "pinia": "^2.2.2",
+    "placeholder-loading": "^0.6.0",
     "vue": "^3.4.29",
+    "vue-content-loader": "^2.0.1",
     "vue-i18n": "^9.14.0",
     "vue-router": "^4.3.3",
     "vuex": "^4.1.0"

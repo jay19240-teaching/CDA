@@ -23,6 +23,25 @@ textarea:focus, input:focus{
     max-width: 70%;
 }
 
+.top-container {
+    position: relative;
+    z-index: 200;
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: -50px;
+    display: block;
+    max-width: 70%;
+    @apply mx-auto;
+    @apply bg-epsilon;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background-image: linear-gradient(45deg, #999, #FFF 55%);
+    overflow: hidden;
+    animation: fadeIn;
+    animation-duration: 1s;
+}
+
 /* --------------------------------------------------------------------------
 // HOME
 // ------------------------------------------------------------------------*/
@@ -42,6 +61,37 @@ textarea:focus, input:focus{
     margin-left: auto;
     margin-right: auto;
     z-index: 100;
+}
+
+.header-nav {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
+
+.header-nav-btn {
+    @apply bg-gamma;
+    color: #fff;
+    height: 45px;
+    width: 45px;
+    z-index: 9999;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    margin-right: 20px;
+}
+
+.header-nav-title {
+    @apply text-delta;
+    font-size:23px;
+    text-shadow: 0 0 0px #fff, 0 0 16px #fff, 0 0 24px #fff;
 }
 
 /*--------------------------------------------------------------------------
@@ -132,17 +182,6 @@ textarea:focus, input:focus{
     margin-right: 5px;
 }
 
-/*--------------------------------------------------------------------------
- CARDS
---------------------------------------------------------------------------*/
-.cards {
-    height: calc(100vh - 300px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .home-cards {
     @apply grid;
     @apply grid-cols-1;
@@ -152,41 +191,27 @@ textarea:focus, input:focus{
     max-width:70%;
 }
 
-/*--------------------------------------------------------------------------
- POKECARD
---------------------------------------------------------------------------*/
-.pokecard {
-    margin-top: 10px;
-    display:block;
-    min-width:150px;
-    background-image: linear-gradient(45deg, #999, #FFF 55%);
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    text-align:center;
-}
-
-.pokecard-picture {
-    display: block;
-    max-width: 70px;
+.home-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    max-width: 300px;
     margin: 0 auto;
 }
 
-.pokecard-name {
-    font-size: 12px;
-    font-weight: bold;
+.home-pagination-item {
+    margin: 5px;
+    cursor:pointer;
+    @apply text-beta;
 }
 
-.pokecard-id {
-    font-size: 12px;
+.home-pagination-item:hover, .home-pagination-item.active {
+    @apply text-alpha;
+    text-decoration: underline;
 }
 
-/*--------------------------------------------------------------------------
- HOME ARROW
---------------------------------------------------------------------------*/
 .home-arrow {
     position: fixed;
     top: 50%;
@@ -202,7 +227,7 @@ textarea:focus, input:focus{
     opacity:1;
 }
 .home-arrow.active:hover {
-    @apply text-alpha;
+    @apply text-gamma;
 }
 .home-arrow.left {
     left: 0;
@@ -211,9 +236,6 @@ textarea:focus, input:focus{
     right: 0;
 }
 
-/*--------------------------------------------------------------------------
- HOME NAV
---------------------------------------------------------------------------*/
 .home-nav {
     display: flex;
     font-size: 12px;
@@ -240,6 +262,73 @@ textarea:focus, input:focus{
 }
 
 /*--------------------------------------------------------------------------
+ LOADING
+--------------------------------------------------------------------------*/
+.loading {
+    display: none;
+    position: fixed;
+    inset: 0 0 0 0;
+    background-color: #ffffffd4;
+    z-index: 9999;
+}
+.loading-spinner {
+    width: 40px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.loading.on {
+    display: block;
+}
+.loading.on .loading-spinner {
+    animation: 1s ease-in-out loading-spin infinite;
+}
+
+@keyframes loading-spin {
+    from { transform: translate(-50%, -50%) rotate(0); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/*--------------------------------------------------------------------------
+ POKECARD
+--------------------------------------------------------------------------*/
+.pokecard {
+    margin-top: 10px;
+    display:block;
+    min-width:150px;
+    padding-bottom: 5px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    text-align:center;
+    cursor:pointer;
+    animation: fadeIn;
+    animation-duration: 1s;
+    background-color: #fff;
+}
+
+.pokecard-picture {
+    display: block;
+    margin: 0 auto;
+    height: 100px;
+    width:100%;
+    max-height: 80px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+}
+
+.pokecard-name {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.pokecard-id {
+    font-size: 12px;
+}
+
+/*--------------------------------------------------------------------------
  DETAIL
 --------------------------------------------------------------------------*/
 .detail {
@@ -248,9 +337,6 @@ textarea:focus, input:focus{
     max-width: 600px;
     margin: 0 auto;
     margin-top: -50px;
-}
-
-.detail-pokemon {
     display: block;
     max-width: 70%;
     @apply mx-auto;
@@ -261,44 +347,66 @@ textarea:focus, input:focus{
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     background-image: linear-gradient(45deg, #999, #FFF 55%);
     overflow: hidden;
+    animation: fadeIn;
+    animation-duration: 1s;
 }
 
-.detail-pokemon-picture {
-    max-width: 130px;
+.detail-picture {
+    display: block;
     margin: 0 auto;
     margin-bottom: 10px;
 }
 
-.detail-pokemon-info {
+.detail-info {
     display: flex;
-    
+    margin-bottom: 5px;
 }
-.detail-pokemon-info-name {
+.detail-info-name {
+    position: relative;
     font-size:25px;
     font-weight: bold;
+    margin-right: 40px;
+    @apply text-gamma;
 }
 
-.detail-pokemon-info-id {
+.detail-info-name-text {
+    position: relative;
+}
+
+.detail-info-name-id {
+    position: absolute;
+    top: 0;
+    right: -40px;
     margin-left: 10px;
     font-size: 14px;
-    color: grey;
+    @apply text-beta;
 }
 
-.detail-pokemon-description {
-    font-size:12px;
-}
-
-.detail-pokemon-footer {
+.detail-body {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
 }
 
-.detail-pokemon-footer-badges {
+.detail-body-description {
+    font-size: 12px;
+    @apply text-gamma;
+    animation: fadeIn;
+    animation-duration: 1s;
+}
+
+.detail-body-stats {
+    position: relative;
     flex: 1;
+    animation: fadeIn;
+    animation-duration: 1s;
 }
 
-.detail-pokemon-footer-badge {
+.detail-body-stats-item {
     display: flex;
     flex: 1;
     justify-content: space-between;
@@ -308,27 +416,77 @@ textarea:focus, input:focus{
     font-size: 10px;
 }
 
-.detail-pokemon-footer-badge-name {
+.detail-body-stats-item-name {
     font-weight: bold;
+    @apply text-gamma;
+    line-height: 1rem;
 }
 
-.detail-pokemon-footer-actions {
+.detail-body-stats-item-value {
+    line-height: 1rem;
+}
+
+.detail-body-actions {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.detail-pokemon-footer-action {
+.detail-body-action {
     display: block;
-    background-color: #c2c2c2;
     border-radius: 10px;
     margin-left: 12px;
+    padding: 10px;
+    font-size: 16px;
+    cursor:pointer;
+    @apply bg-delta;
+    @apply text-beta;
 }
 
-.detail-pokemon-footer-action-icon {
+.detail-body-action:hover {
+    @apply text-gamma;
+}
+
+.detail-body-action.active {
+    @apply text-delta;
+    @apply bg-beta;
+}
+
+.detail-body-action-icon {
     display: block;
     width: 50px;
     height: 50px;
+}
+
+.detail-body-infos {
+    position:absolute;
+    left: 0;
+    right: 48px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.detail-info-nav {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: right;
+}
+
+.detail-info-nav-item {
+    cursor: pointer;
+    margin-left: 10px;
+    font-size:14px;
+    @apply text-alpha;
+}
+
+.detail-info-nav-item:hover {
+    @apply text-delta;
 }
 
 /*--------------------------------------------------------------------------
@@ -375,6 +533,7 @@ textarea:focus, input:focus{
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
 }
 .nav-btn-icon {
     position: absolute;
@@ -408,6 +567,12 @@ textarea:focus, input:focus{
 .nav-bar.active {
     left: 0;
 }
+.nav-bar-user {
+    @apply text-delta;
+    padding: 10px;
+    padding-left: 40px;
+    font-weight: bold;
+}
 .nav-bar-items {
     position: relative;
     width: 100%;
@@ -422,6 +587,7 @@ textarea:focus, input:focus{
     border-top: 1px solid rgba(255,255,255,0.1);
     border-bottom: 1px solid #00000033;
     transition: all 0.3s ease;
+    cursor:pointer;
     @apply text-delta;
 }
 .nav-bar-items-li:hover {
@@ -446,117 +612,80 @@ textarea:focus, input:focus{
 /*--------------------------------------------------------------------------
  NAV OVERLAY
 --------------------------------------------------------------------------*/
-.navOverlay {
+.overlay {
     display: none;
     position: fixed;
     inset: 0 0 0 0;
     background: #000000a6;
     z-index: 900;
 }
-.navOverlay.active {
+.overlay.active {
     display: block;
 }
 
 /*--------------------------------------------------------------------------
- sidemenu
+ INPUT
 --------------------------------------------------------------------------*/
-
-.sidemenu nav {
-    width: 200px;
-    background: grey;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99;
+.input {
+    @apply bg-gray-50;
+    @apply border;
+    @apply border-delta;
+    @apply text-beta;
+    @apply text-sm;
+    @apply rounded-lg;
+    @apply focus:ring-gamma;
+    @apply focus:border-alpha;
+    @apply block;
+    @apply w-full;
+    @apply p-1.5;
 }
 
-.sidemenu-btn {
-    display: block;
-    width: 50px;
-    height: 50px;
-    background: grey;
-    border: none;
-    position: relative;
-    z-index: 100;
-    appearance: none;
-    cursor: pointer;
-    outline: none;
+/*--------------------------------------------------------------------------
+ BUTTON
+--------------------------------------------------------------------------*/
+.button {
+    @apply text-white;
+    @apply bg-beta;
+    @apply hover:bg-gamma;
+    @apply focus:ring-4;
+    @apply focus:outline-none;
+    @apply focus:ring-delta;
+    @apply font-medium;
+    @apply rounded-lg;
+    @apply text-sm;
+    @apply w-full;
+    @apply px-5;
+    @apply py-2.5;
+    @apply text-center;
 }
 
-.sidemenu-btn span {
-    display: block;
-    width: 20px;
-    height: 2px;
-    margin: auto;
-    background: white;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transition: all .4s ease;
+/*--------------------------------------------------------------------------
+ FORM
+--------------------------------------------------------------------------*/
+.form {
+    max-width: none;
+    width: 100%;
 }
 
-.sidemenu-btn span.top {
-    transform: translateY(-8px);
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
 }
 
-.sidemenu-btn span.bottom {
-    transform: translateY(8px);
+.form-title {
+    text-align: center;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    margin-bottom:10px;
+    @apply border-gamma;
+    @apply text-gamma;
 }
 
-.sidemenu-btn.active{
-    .top {
-        transform: rotate(-45deg);
-    }
-    .mid{
-        transform: translateX(-20px) rotate(360deg);
-        opacity: 0;
-    }
-    .bottom {
-        transform: rotate(45deg);
-    }
-}
-
-.sidemenu-wrapper {
-    padding-top: 50px;
-  }
-
-.sidemenu-list {
-    padding-top: 50px;
-    list-style:none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidemenu-item {
-    a {
-        text-decoration: none;
-        line-height: 1.6em;
-        font-size: 1.6em;
-        padding: .5em;
-        display: block;
-        color: white;
-        transition: .4s ease;
-
-        &:hover {
-            background: lightgrey;
-            color: dimgrey;
-        }
-    }
-}
-
-.translateX-enter{
-	transform:translateX(-200px);
-	opacity: 0;
-}
-
-.translateX-enter-active,.translateX-leave-active{
-	transform-origin: top left 0;
-	transition:.2s ease;
-}
-
-.translateX-leave-to{
-	transform: translateX(-200px);
-	opacity: 0;
+.form-error {
+    font-size:12px;
+    color: red;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }

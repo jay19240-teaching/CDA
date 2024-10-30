@@ -106,8 +106,9 @@ class CreatureController extends Controller
         return response()->json($creature);
     }
 
-    public function show(Creature $creature)
+    public function show(string $id)
     {
+        $creature = Creature::with('user')->find($id);
         return response()->json($creature);
     }
 
@@ -146,6 +147,11 @@ class CreatureController extends Controller
     public function destroy(Creature $creature)
     {
         $this->authorize('destroy', $creature);
+
+        if (File::exists(public_path('images/uploads/' . $creature->avatar))) {
+            File::delete(public_path('images/uploads/' . $creature->avatar));
+        }
+
         $creature->delete();
         return response()->json(['count' => Creature::count()]);
     }

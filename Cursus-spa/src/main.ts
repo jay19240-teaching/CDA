@@ -1,6 +1,11 @@
-import './index.css'
+import './index.css';
+import 'animate.css';
+import 'ant-design-vue/dist/reset.css';
+import 'placeholder-loading/dist/css/placeholder-loading.css';
+
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+import Antd from 'ant-design-vue';
 import App from './App.vue';
 import router from './router';
 import { createI18n } from 'vue-i18n';
@@ -15,6 +20,7 @@ const i18n = createI18n({
 });
 
 const app = createApp(App);
+app.use(Antd);
 app.use(i18n);
 app.use(createPinia());
 app.use(router);

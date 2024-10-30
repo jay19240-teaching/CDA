@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import * as CreatureService from '@/_services/CreatureService';
+import { useGuiStore } from '@/stores/Gui';
+import Image from '@/components/Image.vue';
 
-const filtersOpened = ref(false);
-const races = ref([]);
-const types = ref([]);
-const pagination = ref<CreatureService.CreaturePagination>();
 const perPageList = [1, 3, 6, 12];
 const orderList = ref([
   { field: 'atk', type: 'ASC' },
@@ -14,12 +12,17 @@ const orderList = ref([
   { field: 'capture_rate', type: 'ASC' }
 ]);
 
+const filtersOpened = ref(false);
+const races = ref([]);
+const types = ref([]);
+const pagination = ref<CreatureService.CreaturePagination>()
 const order = ref(orderList.value[0]);
 const perPage = ref(12);
 const page = ref(1);
 const name = ref('');
 const typesFiltered = ref([]);
 const racesFiltered = ref([]);
+const pageList = ref<number[]>([]);
 
 const form = ref({
   name: '',
@@ -31,6 +34,10 @@ onMounted(async () => {
   races.value = await CreatureService.getRaces();
   types.value = await CreatureService.getTypes();
   await fetchCreatures();
+
+  const guiStore = useGuiStore();
+  guiStore.gui.title = 'Bestiaire';
+  guiStore.gui.titleHasBack = false;
 });
 
 const prevActive = computed(() => {
@@ -64,9 +71,14 @@ function selectPerPage(value: number) {
   fetchCreatures();
 }
 
-function selectOrderBy(order: any) {
-  order.type = order.type == 'ASC' ? 'DESC' : 'ASC';
-  order.value = order;
+function selectOrderBy(orderArg: any) {
+  orderArg.type = orderArg.type == 'ASC' ? 'DESC' : 'ASC';
+  order.value = orderArg;
+  fetchCreatures();
+}
+
+function changePage(value: number) {
+  page.value = value;
   fetchCreatures();
 }
 
@@ -80,6 +92,14 @@ async function fetchCreatures() {
     orderBy: order.value.field,
     orderType: order.value.type
   });
+
+  pageList.value = [];
+
+  for (let i = 1; i <= pagination.value.maxPages; i++) {
+    pageList.value.push(i);
+  }
+
+  window.scrollTo(0, 0);
 }
 
 function search() {
@@ -106,8 +126,7 @@ function search() {
           </div>
           <div class="grid grid-cols-3 gap-1 mb-4">
             <div v-for="type in types" class="home-search-filters-item">
-              <input type="checkbox" :id="type" :value="type" class="home-search-filters-item-checkbox"
-                v-model="form.types" />
+              <input type="checkbox" :id="type" :value="type" class="home-search-filters-item-checkbox" v-model="form.types" />
               <label :for="type">{{ type }}</label>
             </div>
           </div>
@@ -125,35 +144,39 @@ function search() {
       </div>
       <input type="submit" class="home-search-btnSearch" @click="search()" value="Rechercher"/>
     </div>
-    <div class="container flex justify-between">
+    <div class="container flex flex-col items-center justify-between sm:flex-row sm:items-start">
       <div class="home-nav">
         <div class="home-nav-title">Par page: </div>
         <div v-for="value in perPageList" class="home-nav-item">
-          <span class="home-nav-item-label" @click="selectPerPage(value)" :class="{ active: value == perPage }">{{ value
-            }}</span>
+          <span class="home-nav-item-label" @click="selectPerPage(value)" :class="{ active: value == perPage }">{{ value }}</span>
         </div>
       </div>
       <div class="home-nav">
         <div v-for="value in orderList" class="home-nav-item">
           <span v-if="value.type == 'ASC'" class="material-symbols-outlined">arrow_drop_up</span>
           <span v-if="value.type == 'DESC'" class="material-symbols-outlined">arrow_drop_down</span>
-          <span class="home-nav-item-label" @click="selectOrderBy(value)" :class="{ active: value == orderBy }">
+          <span class="home-nav-item-label" @click="selectOrderBy(value)" :class="{ active: value == order }">
             {{ value.field }}
           </span>
         </div>
       </div>
     </div>
+  </div>
+  <div class="home-cards sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    <router-link :to="{ name: 'creatures-show', params: { id: creature.id }}" v-if="pagination" v-for="creature in pagination.creatures" :key="creature.id" class="pokecard">
+      <Image :src="creature.avatar" default-src="default.jpg" path="http://localhost:8000/images/uploads/" class="pokecard-picture"/>
+      <div class="pokecard-name">{{ creature.name }}</div>
+      <div class="pokecard-id">#0{{ creature.id }}</div>
+    </router-link>
+  </div>
 
-
-    <div class="home-cards sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <div v-if="pagination" v-for="creature in pagination.creatures" :key="creature.id" class="pokecard">
-        <img src="/pokemon-0.png" class="pokecard-picture" />
-        <div class="pokecard-name">{{ creature.name }}</div>
-        <div class="pokecard-id">#0{{ creature.id }}</div>
-      </div>
-    </div>
+  <div class="home-pagination">
+    <div v-for="value in pageList" class="home-pagination-item" @click="changePage(value)" :class="{ active: page == value }">{{ value }}</div>
   </div>
 
   <span class="material-symbols-outlined home-arrow left" @click="handlePrev()" :class="{ active: prevActive }">arrow_left</span>
   <span class="material-symbols-outlined home-arrow right" @click="handleNext()" :class="{ active: nextActive }">arrow_right</span>
+  <div class="loading" :class="{ on: !pagination }">
+    <img src="/loader.png" class="loading-spinner"/>
+  </div>
 </template>
