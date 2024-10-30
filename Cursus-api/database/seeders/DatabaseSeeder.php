@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@pokedex.com',
             'password' => Hash::make('test123'),
             'email_verified_at' => now(),
-            'remember_token' => Str::random(10)
+            'remember_token' => Str::random(10),
+            'token' => Str::random(40)
         ]);
 
         User::create([
@@ -31,7 +32,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@pokedex.com',
             'password' => Hash::make('test123'),
             'email_verified_at' => now(),
-            'remember_token' => Str::random(10)
+            'remember_token' => Str::random(10),
+            'token' => Str::random(40)
         ]);
 
         User::factory(10)->create();

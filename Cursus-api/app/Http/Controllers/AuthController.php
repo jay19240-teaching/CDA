@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    /**
-     * Handle an incoming authentication request.
-     */
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
@@ -28,9 +25,6 @@ class AuthController extends Controller
         return response()->json(['user' => null], 401);
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
     public function logout(Request $request)
     {
         Auth::logout();
