@@ -13,6 +13,5 @@ export interface Creature {
     race: CreatureRace;
     avatar?: string;
     avatar_blob?: File;
-    user_id?: number;
     user?: User;
 };

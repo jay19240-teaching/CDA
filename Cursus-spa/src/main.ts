@@ -8,9 +8,10 @@ import { createPinia } from 'pinia';
 import Antd from 'ant-design-vue';
 import App from './App.vue';
 import router from './router';
+
 import { createI18n } from 'vue-i18n';
-import fr from './locales/fr.json';
-import en from './locales/en.json';
+import fr from './_locales/fr.json';
+import en from './_locales/en.json';
 
 // configure i18n
 const i18n = createI18n({

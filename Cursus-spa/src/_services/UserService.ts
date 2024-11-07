@@ -11,7 +11,7 @@ export async function getUser(id: number): Promise<User> {
   return res.data;
 }
 
-export async function updateUser(user: User): Promise<any> {
+export async function updateUser(user: Partial<User>): Promise<any> {
   return await Axios.patch('/users/' + user.id, user);
 }
 

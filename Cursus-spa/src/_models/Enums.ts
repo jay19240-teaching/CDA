@@ -9,3 +9,5 @@ export enum CreatureRace {
   DRAGON = 'DRAGON',
   PLANT = 'PLANT'
 };
+
+const race1: CreatureRace = CreatureRace.DRAGON;

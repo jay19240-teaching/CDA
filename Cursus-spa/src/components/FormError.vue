@@ -1,7 +1,7 @@
 <script setup lang="ts">
-   const props = defineProps(['messages'])
+   const props = defineProps(['errors'])
 </script>
 
 <template>
-    <div class="form-error" v-for="msg in props['messages']">{{ msg }}</div>
+    <div class="form-error" v-for="error in props.errors">{{ error }}</div>
 </template>

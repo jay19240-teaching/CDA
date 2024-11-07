@@ -11,6 +11,10 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/ios": "^6.1.2",
     "animate.css": "^4.1.1",
     "ant-design-vue": "^4.2.5",
     "axios": "^1.7.5",
