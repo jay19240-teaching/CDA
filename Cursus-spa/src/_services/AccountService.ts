@@ -12,7 +12,6 @@ export async function login(credentials: { email: string, password: string }): P
 
   const userStore = useUserStore();
   userStore.setUser({
-    id: res.data.user.id,
     email: res.data.user.email,
     role: res.data.user.role
   });
@@ -31,9 +30,4 @@ export async function logout() {
     const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
   }
-}
-
-export function isLogged(): boolean {
-  const userStore = useUserStore();
-  return userStore.isLogged;
 }

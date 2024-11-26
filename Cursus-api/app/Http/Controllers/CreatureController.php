@@ -23,7 +23,7 @@ class CreatureController extends Controller
         return response()->json(Creature::all());
     }
 
-    public function indexByUser(User $user = null)
+    public function listByUser(User $user = null)
     {
         $creatures = DB::table('creatures')->where('user_id', '=', $user->id)->get();
         return response()->json($creatures);
@@ -95,7 +95,7 @@ class CreatureController extends Controller
         $creature = new Creature();
         $creature->user_id = Auth::user()->id;
         $creature->fill($formFields);
-        
+
         if ($request->file('avatar_blob')) {
             $fileName = time() . '_' . $request->avatar_blob->getClientOriginalName();
             $creature->avatar = $fileName;

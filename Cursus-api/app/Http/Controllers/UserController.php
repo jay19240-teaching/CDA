@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Str;
+
+use App\Http\Requests\UserStore;
 
 class UserController extends Controller
 {
@@ -16,22 +19,16 @@ class UserController extends Controller
         return response()->json(User::all());
     }
 
-    public function store(Request $request)
+    public function store(UserStore $request)
     {
-        $this->authorize('store', User::class);
-
-        $formFields = $request->validate([
-            'name' => 'required|string',
-            'role' => ['required', new Enum(RoleEnum::class)],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')],
-            'password' => ['required', 'confirmed', Password::defaults()]
-        ]);
+        $formFields = $request->validated();
 
         $user = new User();
         $user->fill($formFields);
+        $user->token = Str::random(40);
         $user->save();
 
-        return response()->json($user);
+        return response()->json($formFields);
     }
 
     public function show(User $user)

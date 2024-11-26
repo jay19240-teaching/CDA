@@ -35,7 +35,7 @@ const creature = ref<Creature>({
   race: CreatureRace.DRAGON
 });
 
-onMounted(async () => {  
+onMounted(async () => {
   creature.value = route.meta.data as Creature;
   const guiStore = useGuiStore();
   guiStore.gui.title = 'Detail';
