@@ -25,7 +25,7 @@ export async function getCreatures(): Promise<Creature[]> {
 }
 
 export async function paginateCreatures(params: PaginateParams): Promise<CreaturePagination> {
-  const res = await Axios.get('/creatures-paginate', { params: params });
+  const res = await Axios.get('/creatures/search', { params: params });
   return res.data;
 }
 
@@ -55,11 +55,11 @@ export async function deleteCreature(id: number): Promise<any> {
 }
 
 export async function getTypes(): Promise<[]> {
-  const res = await Axios.get('/creatures-types');
+  const res = await Axios.get('/creatures/types');
   return res.data;
 }
 
 export async function getRaces(): Promise<[]> {
-  const res = await Axios.get('/creatures-races');
+  const res = await Axios.get('/creatures/races');
   return res.data;
 }

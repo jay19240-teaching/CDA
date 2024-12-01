@@ -19,6 +19,11 @@ class CreatureCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
+    /**
+     * Configure the CrudPanel object. Apply settings to all operations.
+     * 
+     * @return void
+     */
     public function setup()
     {
         CRUD::setModel(\App\Models\Creature::class);
@@ -26,6 +31,12 @@ class CreatureCrudController extends CrudController
         CRUD::setEntityNameStrings('creature', 'creatures');
     }
 
+    /**
+     * Define what happens when the List operation is loaded.
+     * 
+     * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
+     * @return void
+     */
     protected function setupListOperation()
     {
         CRUD::column([
@@ -50,6 +61,12 @@ class CreatureCrudController extends CrudController
         ]);
     }
 
+    /**
+     * Define what happens when the Create operation is loaded.
+     * 
+     * @see https://backpackforlaravel.com/docs/crud-operation-create
+     * @return void
+     */
     protected function setupCreateOperation()
     {
         CRUD::setValidation(AdminCreatureRequest::class);
@@ -117,6 +134,12 @@ class CreatureCrudController extends CrudController
         ]);
     }
 
+    /**
+     * Define what happens when the Update operation is loaded.
+     * 
+     * @see https://backpackforlaravel.com/docs/crud-operation-update
+     * @return void
+     */
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();

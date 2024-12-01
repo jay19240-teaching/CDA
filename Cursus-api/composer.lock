@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c07e7200b19e01f8176ceb70259993e8",
+    "content-hash": "66c4e2b0a73c77ff465b8da36261065a",
     "packages": [
         {
             "name": "backpack/basset",
@@ -82,16 +82,16 @@
         },
         {
             "name": "backpack/crud",
-            "version": "6.7.41",
+            "version": "6.7.42",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/CRUD.git",
-                "reference": "ac35070c94c3db7ceb7680b5eb7307cac56eea74"
+                "reference": "13f6fc4f7b5f42361ef78abcf14f6ca8d4ac3461"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/ac35070c94c3db7ceb7680b5eb7307cac56eea74",
-                "reference": "ac35070c94c3db7ceb7680b5eb7307cac56eea74",
+                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/13f6fc4f7b5f42361ef78abcf14f6ca8d4ac3461",
+                "reference": "13f6fc4f7b5f42361ef78abcf14f6ca8d4ac3461",
                 "shasum": ""
             },
             "require": {
@@ -114,17 +114,17 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0-dev"
-                },
                 "laravel": {
-                    "providers": [
-                        "Backpack\\CRUD\\BackpackServiceProvider"
-                    ],
                     "aliases": {
                         "CRUD": "Backpack\\CRUD\\app\\Library\\CrudPanel\\CrudPanelFacade",
                         "Widget": "Backpack\\CRUD\\app\\Library\\Widget"
-                    }
+                    },
+                    "providers": [
+                        "Backpack\\CRUD\\BackpackServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -170,22 +170,22 @@
             ],
             "support": {
                 "issues": "https://github.com/Laravel-Backpack/CRUD/issues",
-                "source": "https://github.com/Laravel-Backpack/CRUD/tree/6.7.41"
+                "source": "https://github.com/Laravel-Backpack/CRUD/tree/6.7.42"
             },
-            "time": "2024-10-15T14:05:11+00:00"
+            "time": "2024-11-20T14:40:17+00:00"
         },
         {
-            "name": "backpack/theme-tabler",
-            "version": "1.2.14",
+            "name": "backpack/theme-coreuiv4",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Laravel-Backpack/theme-tabler.git",
-                "reference": "2a8bb2118d11d8b97589ce3434c410c468b96975"
+                "url": "https://github.com/Laravel-Backpack/theme-coreuiv4.git",
+                "reference": "0a1af54852fb133d7e338d81d382e334977ba6fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/theme-tabler/zipball/2a8bb2118d11d8b97589ce3434c410c468b96975",
-                "reference": "2a8bb2118d11d8b97589ce3434c410c468b96975",
+                "url": "https://api.github.com/repos/Laravel-Backpack/theme-coreuiv4/zipball/0a1af54852fb133d7e338d81d382e334977ba6fc",
+                "reference": "0a1af54852fb133d7e338d81d382e334977ba6fc",
                 "shasum": ""
             },
             "require": {
@@ -197,18 +197,15 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "1.0.x-dev"
-                },
                 "laravel": {
                     "providers": [
-                        "Backpack\\ThemeTabler\\AddonServiceProvider"
+                        "Backpack\\ThemeCoreuiv4\\AddonServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Backpack\\ThemeTabler\\": "src/"
+                    "Backpack\\ThemeCoreuiv4\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -216,11 +213,6 @@
                 "MIT"
             ],
             "authors": [
-                {
-                    "name": "Mauro Martinez",
-                    "email": "maurohmartinez@gmail.com",
-                    "homepage": "https://backpackforlaravel.com"
-                },
                 {
                     "name": "Cristian Tabacitu",
                     "email": "hello@backpackforlaravel.com",
@@ -230,22 +222,27 @@
                     "name": "Antonio Almeida",
                     "email": "promatik@gmail.com",
                     "homepage": "https://backpackforlaravel.com"
+                },
+                {
+                    "name": "Mauro Martinez",
+                    "email": "maurohmartinez@gmail.com",
+                    "homepage": "https://backpackforlaravel.com"
                 }
             ],
-            "description": "UI for Backpack v6 that uses Tabler and Bootstrap v5.",
-            "homepage": "https://github.com/backpack/theme-tabler",
+            "description": "UI for Backpack v6 that uses CoreUI v4 and Bootstrap v5.",
+            "homepage": "https://github.com/backpack/theme-coreuiv4",
             "keywords": [
                 "Backpack Addon",
                 "Backpack for Laravel",
-                "ThemeTabler",
+                "ThemeCoreuiv4",
                 "backpack",
                 "laravel"
             ],
             "support": {
-                "issues": "https://github.com/Laravel-Backpack/theme-tabler/issues",
-                "source": "https://github.com/Laravel-Backpack/theme-tabler/tree/1.2.14"
+                "issues": "https://github.com/Laravel-Backpack/theme-coreuiv4/issues",
+                "source": "https://github.com/Laravel-Backpack/theme-coreuiv4/tree/1.1.4"
             },
-            "time": "2024-10-17T15:50:41+00:00"
+            "time": "2024-10-17T15:49:51+00:00"
         },
         {
             "name": "brick/math",
@@ -402,12 +399,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "Creativeorange\\Gravatar\\GravatarServiceProvider"
-                    ],
                     "aliases": {
                         "Gravatar": "Creativeorange\\Gravatar\\Facades\\Gravatar"
-                    }
+                    },
+                    "providers": [
+                        "Creativeorange\\Gravatar\\GravatarServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -1226,16 +1223,16 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8"
+                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
-                "reference": "6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
+                "reference": "f9c436286ab2892c7db7be8c8da4ef61ccf7b455",
                 "shasum": ""
             },
             "require": {
@@ -1289,7 +1286,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.0.3"
+                "source": "https://github.com/guzzle/promises/tree/2.0.4"
             },
             "funding": [
                 {
@@ -1305,7 +1302,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-18T10:29:17+00:00"
+            "time": "2024-10-17T10:06:22+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -3347,16 +3344,16 @@
         },
         {
             "name": "psr/log",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "79dff0b268932c640297f5208d6298f71855c03e"
+                "reference": "f16e1d5863e37f8d8c2a01719f5b34baa2b714d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/79dff0b268932c640297f5208d6298f71855c03e",
-                "reference": "79dff0b268932c640297f5208d6298f71855c03e",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/f16e1d5863e37f8d8c2a01719f5b34baa2b714d3",
+                "reference": "f16e1d5863e37f8d8c2a01719f5b34baa2b714d3",
                 "shasum": ""
             },
             "require": {
@@ -3391,9 +3388,9 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/3.0.1"
+                "source": "https://github.com/php-fig/log/tree/3.0.2"
             },
-            "time": "2024-08-21T13:31:24+00:00"
+            "time": "2024-09-11T13:17:53+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -3984,16 +3981,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.5.0",
+            "version": "v3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1"
+                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1",
-                "reference": "0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
+                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
                 "shasum": ""
             },
             "require": {
@@ -4031,7 +4028,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.1"
             },
             "funding": [
                 {
@@ -4047,7 +4044,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-18T09:32:20+00:00"
+            "time": "2024-09-25T14:20:29+00:00"
         },
         {
             "name": "symfony/error-handler",

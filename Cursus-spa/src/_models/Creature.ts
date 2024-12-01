@@ -2,7 +2,7 @@ import { CreatureType, CreatureRace } from './Enums';
 import { type User } from './User';
 
 export interface Creature {
-    id: number;
+    id?: number;
     name:string;
     pv: number;
     atk: number;

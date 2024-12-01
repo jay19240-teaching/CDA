@@ -33,12 +33,4 @@ class CreatureFactory extends Factory
             'user_id' => random_int(1, User::count())
         ];
     }
-
-    public function configure()
-    {
-        return $this->afterCreating(function (Creature $creature) {
-            $weapons = Weapon::inRandomOrder()->take(rand(1, 4))->pluck('id');
-            $creature->weapons()->attach($weapons);
-        });
-    }
 }

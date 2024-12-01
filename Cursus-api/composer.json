@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.2",
         "backpack/crud": "^6.7",
-        "backpack/theme-tabler": "^1.2",
+        "backpack/theme-coreuiv4": "^1.1",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",

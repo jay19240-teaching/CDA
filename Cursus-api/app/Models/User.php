@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
 use App\Models\Creature;
 use App\Enums\RoleEnum;
 use Illuminate\Support\Facades\Auth;
@@ -18,11 +16,6 @@ class User extends Authenticatable
     use CrudTrait;
     use HasFactory, Notifiable, HasApiTokens;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'role',
@@ -34,22 +27,12 @@ class User extends Authenticatable
         'role' => RoleEnum::ROLE_USER
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'token',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [

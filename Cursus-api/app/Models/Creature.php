@@ -13,11 +13,6 @@ class Creature extends Model
     use CrudTrait;
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'pv',
@@ -26,15 +21,9 @@ class Creature extends Model
         'speed',
         'type',
         'race',
-        'capture_rate',
-        'user_id'
+        'capture_rate'
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [

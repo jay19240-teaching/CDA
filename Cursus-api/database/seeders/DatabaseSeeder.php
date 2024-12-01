@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Creature;
+use App\Models\CreatureWeapon;
 use App\Models\Weapon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -39,5 +40,6 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Weapon::factory(10)->create();
         Creature::factory(20)->create();
+        CreatureWeapon::factory(100)->create();
     }
 }
