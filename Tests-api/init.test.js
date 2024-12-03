@@ -60,11 +60,11 @@ describe("Creatures POST", () => {
     const cur = await Axios.get('/creatures');
     const curNumCreatures = cur.data.length;
 
-    expect(createRes.data.name).toBe('Pika');
+    expect(createRes.data.name).toBe('Pikachu');
     expect(curNumCreatures).toBe(oldNumCreatures + 1);
   });
 
-  test("Create with bad data", async (data = { name: 'Pikachu', pv: 120, atk: 10, def: 10, speed: 3, type: 'ELECTRIK', race: 'MOUSE', capture_rate: 4 }) => {
+  test("Create with bad data", async (data = { name: 'Pika', pv: 120, atk: 10, def: 10, speed: 3, type: 'ELECTRIK', race: 'MOUSE', capture_rate: 4 }) => {
     const old = await Axios.get('/creatures');
     const oldNumCreatures = old.data.length;
     // before
