@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AdminNotified;
 use App\Models\Creature;
 use App\Enums\CreatureRaceEnum;
 use App\Enums\CreatureTypeEnum;
@@ -33,6 +34,8 @@ class CreatureController extends Controller
         }
 
         $creature->save();
+
+        event(new AdminNotified());
         return response()->json($creature);
     }
 

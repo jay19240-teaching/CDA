@@ -25,8 +25,7 @@ class CreatureStoreRequest extends FormRequest
             'capture_rate' => 'required|numeric|min:0',
             'type' => ['required', new Enum(CreatureTypeEnum::class)],
             'race' => ['required', new Enum(CreatureRaceEnum::class)],
-            'avatar' => 'mimes:jpg,jpeg,png|max:15360',
-            'user_id' => 'required|numeric'
+            'avatar' => 'mimes:jpg,jpeg,png|max:15360'
         ];
     }
 }

@@ -6,12 +6,13 @@ export async function login(credentials: { email: string, password: string }): P
     baseURL: 'http://localhost:8000'
   });
 
-  const res = await Axios.post('/authenticate', credentials, {
+  const res = await Axios.post('/login', credentials, {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   });
 
   const userStore = useUserStore();
   userStore.setUser({
+    id: res.data.user.id,
     email: res.data.user.email,
     role: res.data.user.role
   });

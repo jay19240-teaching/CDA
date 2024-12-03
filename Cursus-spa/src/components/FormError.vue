@@ -3,5 +3,7 @@
 </script>
 
 <template>
-    <div class="form-error" v-for="error in props.errors">{{ error }}</div>
+    <div>
+        <div class="form-error" v-for="error in props.errors">{{ error }}</div>
+    </div>
 </template>

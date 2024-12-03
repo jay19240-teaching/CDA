@@ -10,14 +10,9 @@ import { loadAll } from "@tsparticles/all";
 import config from './config/tsparticles';
 import router from './router';
 import * as AccountService from '@/_services/AccountService';
+import WS from '@/_services/WSService';
 
 const [api, contextHolder] = notification.useNotification();
-
-onMounted(async () => {
-  await loadAll(tsParticles);
-  await tsParticles.load(config);
-});
-
 const menuOpened = ref(false);
 const guiStore = useGuiStore();
 const userStore = useUserStore();
@@ -46,6 +41,16 @@ async function logout() {
   notifStore.setMessage('Déconnexion réussie !');
   router.push('/');
 }
+
+onMounted(async () => {
+  await loadAll(tsParticles);
+  await tsParticles.load(config);
+
+  WS.channel('notification.' + userStore.user.id)
+  .listen('.admin-notified', (e: string) => {
+    notifStore.setMessage('Un utilisateur vient d\'ajouter un pokemon à ta collection !');
+  });
+});
 </script>
 
 <template>

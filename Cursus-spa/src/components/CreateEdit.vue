@@ -23,8 +23,7 @@ const creature = ref<Creature>({
   speed: 0,
   capture_rate: 0,
   type: types[0],
-  race: races[0],
-  user_id: 0
+  race: races[0]
 });
 
 const errors = ref<any>({});
