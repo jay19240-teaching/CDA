@@ -12,10 +12,10 @@ import Image from '@/components/Image.vue';
 const actions = [{
   mode: 'DESCRIPTION',
   icon: 'info'
-},{
+}, {
   mode: 'BADGES',
   icon: 'public'
-},{
+}, {
   mode: 'STATS',
   icon: 'sleep_score'
 }];
@@ -47,15 +47,18 @@ function changeAction(action: any) {
 }
 
 async function destroy() {
-  await CreatureService.deleteCreature(creature.value.id);
-  notifStore.setMessage('Créature supprimée !');
-  router.push('/');
+  if (creature.value.id) {
+    await CreatureService.deleteCreature(creature.value.id);
+    notifStore.setMessage('Créature supprimée !');
+    router.push('/');
+  }
 }
 </script>
 
 <template>
   <div class="top-container">
-    <Image :src="creature.avatar" default-src="default.jpg" path="http://localhost:8000/images/uploads/" class="detail-picture"/>
+    <Image :src="creature.avatar" default-src="default.jpg" path="http://localhost:8000/images/uploads/"
+      class="detail-picture" />
     <div class="detail-info flex-col sm:flex-row">
       <div class="detail-info-name">
         <span class="detail-info-name-text">
@@ -63,15 +66,20 @@ async function destroy() {
           <div class="detail-info-name-id">#{{ creature.id }}</div>
         </span>
       </div>
-      
+
       <div class="detail-info-nav">
-        <router-link class="detail-info-nav-item" :to="{ name: 'edit', params: { id: creature.id }}">Editer</router-link>
+        <router-link class="detail-info-nav-item"
+          :to="{ name: 'edit', params: { id: creature.id } }">Editer</router-link>
         <div class="detail-info-nav-item" @click="destroy">Supprimer</div>
       </div>
     </div>
     <div class="detail-body">
       <div class="detail-body-description" v-if="currentAction.mode == 'DESCRIPTION'">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+        laborum
       </div>
       <div class="detail-body-badges" v-if="currentAction.mode == 'BADGES'">
         <!--to fill in the futur-->
@@ -107,7 +115,8 @@ async function destroy() {
         </div>
       </div>
       <div class="detail-body-actions">
-        <span class="detail-body-action material-symbols-outlined" v-for="action in actions" @click="changeAction(action)" :class="{ active: currentAction.mode == action.mode }">{{ action.icon }}</span>
+        <span class="detail-body-action material-symbols-outlined" v-for="action in actions"
+          @click="changeAction(action)" :class="{ active: currentAction.mode == action.mode }">{{ action.icon }}</span>
       </div>
     </div>
   </div>
