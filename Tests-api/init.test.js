@@ -11,13 +11,13 @@ describe("User Login", () => {
   });
 });
 
-describe("Creatures GET", () => {
-  test('Récupération de la liste des créatures', async () => {
+describe("Creatures", () => {
+  test('List', async () => {
     const res = await Axios.get('/creatures');
     expect(res.data.length).toBeGreaterThanOrEqual(2);
   });
 
-  test('Get Show', async () => {
+  test('Show', async () => {
     const creatures = await Axios.get('/creatures');
     const res = await Axios.get('/creatures/' + creatures.data[0].id);
     expect(res.data.name).toBeTruthy();
@@ -25,8 +25,8 @@ describe("Creatures GET", () => {
     expect(res.data.pv).toBeLessThanOrEqual(100);
   });
 
-  test('Get Paginate', async () => {
-    const res = await Axios.get('/creatures-paginate?page=1');
+  test('Search', async () => {
+    const res = await Axios.get('/creatures/search?page=1');
     expect(res.data.maxPages).toBeGreaterThanOrEqual(0);
     expect(res.data.page).toBe('1');
     expect(res.data.creatures).toHaveLength(3);
@@ -162,7 +162,7 @@ async function login(user, credentials) {
   Axios.defaults.headers.common['Origin'] = 'http://localhost:8000';
   Axios.defaults.headers.common['Referer'] = 'http://localhost:8000';
 
-  const auth = await Axios.post('/authenticate', credentials, {
+  const auth = await Axios.post('/login', credentials, {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   });
 
