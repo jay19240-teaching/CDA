@@ -15,7 +15,7 @@ class CreatureUpdateRequest extends FormRequest
     {
         $creature = $this->route('creature');
 
-        if (Auth::user()->role == RoleEnum::ROLE_ADMIN->value)
+        if (Auth::user()->role == RoleEnum::ROLE_ADMIN)
         {
             return true;
         }
