@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', () => {
     role: ''
   });
 
-  user.value.id = Number(localStorage.getItem('id'));
+  user.value.id = localStorage.getItem('id') as number | null;
   user.value.email = localStorage.getItem('email');
   user.value.role = localStorage.getItem('role');
 
