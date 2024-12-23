@@ -36,6 +36,7 @@ describe("Creatures", () => {
 describe("Creatures PUT", () => {
   test("Update as user owner", async (data = { name: 'New name', _method: 'PUT' }) => {
     const res = await Axios.get('/creatures');
+    console.log(res.data);
     const creature = res.data.find(c => c.user_id == user.id);
     const updateRes = await Axios.post('/creatures/' + creature.id, data);
     expect(updateRes.data.name).toBe('New name');
