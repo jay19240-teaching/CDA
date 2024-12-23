@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use App\Models\Creature;
 use App\Enums\RoleEnum;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +12,6 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use CrudTrait;
     use HasFactory, Notifiable, HasApiTokens;
 
     protected $fillable = [

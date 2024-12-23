@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use App\Enums\CreatureTypeEnum;
 use App\Enums\CreatureRaceEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Creature extends Model
 {
-    use CrudTrait;
     use HasFactory;
 
     protected $fillable = [

@@ -6,8 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "backpack/crud": "^6.7",
-        "backpack/theme-coreuiv4": "^1.1",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
@@ -15,7 +13,6 @@
         "pusher/pusher-php-server": "^7.2"
     },
     "require-dev": {
-        "backpack/generators": "^4.0",
         "fakerphp/faker": "^1.23",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.26",

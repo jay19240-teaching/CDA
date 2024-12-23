@@ -1,11 +1,13 @@
 services:
   laravel-docker:
+    image: pokedex-api
     container_name: laravel-docker
     build: ./Cursus-api
     ports:
       - 8000:80
 
   vue-docker:
+    image: pokedex-vue
     container_name: vue-docker
     build: ./Cursus-spa
     ports:
