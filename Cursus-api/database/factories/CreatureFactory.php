@@ -30,7 +30,7 @@ class CreatureFactory extends Factory
             'type' => CreatureTypeEnum::random(),
             'race' => CreatureRaceEnum::random(),
             'capture_rate' => random_int(0, 100),
-            'user_id' => random_int(1, User::count())
+            'user_id' => random_int(1, 2)
         ];
     }
 }
