@@ -6,6 +6,7 @@ on: # specify the build to trigger the automated ci/cd
       - "main"
 jobs:
   build-and-push-image:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
