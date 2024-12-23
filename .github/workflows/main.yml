@@ -25,6 +25,7 @@ jobs:
             ghcr.io/jay19240-teaching/cda-api:latest
             ghcr.io/jay19240-teaching/cda-api:${{ github.sha }}
 
+
   docker:
     timeout-minutes: 10
     runs-on: ubuntu-latest
