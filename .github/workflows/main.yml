@@ -22,8 +22,8 @@ jobs:
           context: ./Cursus-api
           push: true
           tags: |
-            ghcr.io/jay19240/CDA:latest
-            ghcr.io/jay19240/CDA:${{ github.sha }}
+            ghcr.io/jay19240/cda-api:latest
+            ghcr.io/jay19240/cda-api:${{ github.sha }}
 
   docker:
     timeout-minutes: 10
