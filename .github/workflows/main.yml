@@ -5,7 +5,7 @@ on: # specify the build to trigger the automated ci/cd
     branches:
       - "main"
 jobs:
-  build-and-push-image:
+  build-and-push-image-api:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
@@ -26,6 +26,26 @@ jobs:
             ghcr.io/jay19240-teaching/cda-api:latest
             ghcr.io/jay19240-teaching/cda-api:${{ github.sha }}
 
+  build-and-push-image-spa:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: https://ghcr.io
+          username: jay19240-teaching
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./Cursus-spa
+          push: true
+          tags: |
+            ghcr.io/jay19240-teaching/cda-spa:latest
+            ghcr.io/jay19240-teaching/cda-spa:${{ github.sha }}
 
   docker:
     timeout-minutes: 10
