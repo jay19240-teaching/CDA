@@ -47,7 +47,7 @@ jobs:
             ghcr.io/jay19240-teaching/cda-spa:latest
             ghcr.io/jay19240-teaching/cda-spa:${{ github.sha }}
 
-  docker:
+  tests:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     defaults:

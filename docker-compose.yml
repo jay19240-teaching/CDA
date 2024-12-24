@@ -1,13 +1,13 @@
 services:
   laravel-docker:
     image: ghcr.io/jay19240-teaching/cda-api:latest
-    container_name: laravel-docker
     ports:
       - 8000:80
 
   vue-docker:
     image: ghcr.io/jay19240-teaching/cda-spa:latest
-    container_name: vue-docker
+    environment:
+      VITE_API_BASE: "http://12.12.12.12"
     ports:
       - 80:80
 

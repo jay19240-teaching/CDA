@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/User';
 
 export async function login(credentials: { email: string, password: string }): Promise<void> {
   await Axios.get('/sanctum/csrf-cookie', {
-    baseURL: 'http://localhost:8000'
+    baseURL: import.meta.env.VITE_API_BASE
   });
 
   const res = await Axios.post('/login', credentials, {
