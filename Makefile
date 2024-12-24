@@ -4,7 +4,7 @@ artisan-serve:
 	cd Cursus-api && php artisan serve
 vuejs:
 	cd Cursus-spa && npm run dev
-publish-init:
+init-publish:
 	docker context create pokedex-site --docker "host=ssh://root@178.16.129.31"
 	docker context use pokedex-site
 	docker swarm init
