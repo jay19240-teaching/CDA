@@ -1,0 +1,18 @@
+services:
+  laravel-docker:
+    image: ghcr.io/jay19240-teaching/cda-api-prod:latest
+    ports:
+      - 8000:80
+
+  vue-docker:
+    image: ghcr.io/jay19240-teaching/cda-spa-prod:latest
+    ports:
+      - 80:80
+
+  mysql_db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel
+    ports:
+      - 3306:3306

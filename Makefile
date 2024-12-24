@@ -10,6 +10,7 @@ init-publish:
 	docker swarm init
 publish:
 	docker context use pokedex-site
-	docker stack deploy -c ./docker-compose.yml pokedex
+	docker stack deploy -c ./docker-stack.yml pokedex
+publish-data:
 	docker exec $(shell docker ps --filter "name=^pokedex_laravel-docker" --quiet) bash -c "php artisan migrate"
 	docker exec $(shell docker ps --filter "name=^pokedex_laravel-docker" --quiet) bash -c "php artisan db:seed"
