@@ -1,5 +1,5 @@
 FROM node:lts-alpine as build-stage
-ARG MODE
+ARG MODE=test
 
 WORKDIR /app
 COPY package*.json ./

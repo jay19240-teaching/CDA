@@ -1,13 +1,13 @@
 services:
   laravel-docker:
     container_name: laravel-docker
-    image: ghcr.io/jay19240-teaching/cda-api:latest
+    build: ./Cursus-api
     ports:
       - 8000:80
 
   vue-docker:
     container_name: vue-docker
-    image: ghcr.io/jay19240-teaching/cda-spa:latest
+    build: ./Cursus-spa
     ports:
       - 80:80
 
