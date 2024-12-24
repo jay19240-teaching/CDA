@@ -1,5 +1,6 @@
 # use PHP 8.2
 FROM php:8.3-apache
+ARG MODE=test
 
 # Install common php extension dependencies
 RUN apt-get update && apt-get install -y \
@@ -18,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 COPY . /var/www/app
 WORKDIR /var/www/app
 
-COPY docker/.env /var/www/app/.env
+COPY .env.${MODE} .env
 COPY docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 RUN a2enmod rewrite
