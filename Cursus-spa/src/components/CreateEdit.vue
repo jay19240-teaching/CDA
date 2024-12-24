@@ -8,6 +8,7 @@ import type { Creature } from '@/_models/Creature';
 import * as CreatureService from '@/_services/CreatureService';
 import { useGuiStore } from '@/stores/Gui';
 import FormError from '@/components/FormError.vue';
+import { uploadedPath } from '@/env';
 
 const props = defineProps(['id']);
 const types = Object.values(CreatureType);
@@ -120,7 +121,7 @@ async function submit() {
             <label for="dropzone-file"
               class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
               <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                <img v-if="creature.avatar" class="w-[70%] mb-5" :src="'http://localhost:8000/images/uploads/' + creature.avatar" />
+                <img v-if="creature.avatar" class="w-[70%] mb-5" :src="uploadedPath + creature.avatar" />
                 <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

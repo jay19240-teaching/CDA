@@ -3,15 +3,16 @@ import { ref, onMounted, computed } from 'vue';
 import * as CreatureService from '@/_services/CreatureService';
 import { useGuiStore } from '@/stores/Gui';
 import Image from '@/components/Image.vue';
+import { uploadedPath } from '@/env';
 
 const perPageList = [1, 3, 6, 12];
+
 const orderList = ref([
   { field: 'atk', type: 'ASC' },
   { field: 'def', type: 'ASC' },
   { field: 'speed', type: 'ASC' },
   { field: 'capture_rate', type: 'ASC' }
 ]);
-
 const filtersOpened = ref(false);
 const races = ref([]);
 const types = ref([]);
@@ -23,7 +24,6 @@ const name = ref('');
 const typesFiltered = ref([]);
 const racesFiltered = ref([]);
 const pageList = ref<number[]>([]);
-
 const form = ref({
   name: '',
   types: [],
@@ -164,7 +164,7 @@ function search() {
   </div>
   <div class="home-cards sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     <router-link :to="{ name: 'creatures-show', params: { id: creature.id }}" v-if="pagination" v-for="creature in pagination.creatures" :key="creature.id" class="pokecard">
-      <Image :src="creature.avatar" default-src="default.jpg" :path="import.meta.env.VITE_UPLOADED_BASE" class="pokecard-picture"/>
+      <Image :src="creature.avatar" default-src="default.jpg" :path="uploadedPath" class="pokecard-picture"/>
       <div class="pokecard-name">{{ creature.name }}</div>
       <div class="pokecard-id">#0{{ creature.id }}</div>
     </router-link>
