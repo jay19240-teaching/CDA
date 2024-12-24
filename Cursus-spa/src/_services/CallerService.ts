@@ -25,7 +25,6 @@ Axios.interceptors.response.use(response => response, error => {
     router.push('/login');
   }
   else {
-    console.log('erreur autres');
     return Promise.reject(error);
   }
 });

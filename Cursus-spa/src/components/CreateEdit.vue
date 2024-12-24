@@ -48,25 +48,27 @@ function handleFileUpload(event: any) {
 }
 
 async function create() {
-  errors.value = {};
-  CreatureService.createCreature(creature.value).then(() => {
+  try {
+    await CreatureService.createCreature(creature.value);
     notifStore.setMessage('Créature ajoutée !');
+    errors.value = {};
     router.push('/');
-  }).catch(error => {
+  } catch(error: any) {
     notifStore.setMessage('Echec de soumission !');
     errors.value = error.response.data.errors;
-  });
+  }
 }
 
 async function edit() {
-  errors.value = {};
-  CreatureService.updateCreature(creature.value).then(() => {
+  try {
+    await CreatureService.updateCreature(creature.value);
     notifStore.setMessage('Créature éditée !');
+    errors.value = {};
     router.push('/creatures-show/' + creature.value.id);
-  }).catch(error => {
+  } catch(error: any) {
     notifStore.setMessage('Echec de soumission !');
     errors.value = error.response.data.errors;
-  });
+  }
 }
 
 async function submit() {
@@ -81,39 +83,39 @@ async function submit() {
         <div class="form-fields">
           <div class="form-group">
             <input type="text" class="input" id="creature_name" v-model="creature.name" placeholder="Nom" />
-            <FormError :messages="errors?.name" />
+            <FormError :errors="errors?.name" />
           </div>
           <div class="form-group">
             <input type="number" class="input" id="creature_pv" v-model="creature.pv" placeholder="Point de vie" />
-            <FormError :messages="errors?.pv" />
+            <FormError :errors="errors?.pv" />
           </div>
           <div class="form-group">
             <input type="number" class="input" id="creature_atk" v-model="creature.atk" placeholder="ATK" />
-            <FormError :messages="errors?.atk" />
+            <FormError :errors="errors?.atk" />
           </div>
           <div class="form-group">
             <input type="number" class="input" id="creature_def" v-model="creature.def" placeholder="DEF" />
-            <FormError :messages="errors?.def" />
+            <FormError :errors="errors?.def" />
           </div>
           <div class="form-group">
             <input type="number" class="input" id="creature_speed" v-model="creature.speed" placeholder="Vitesse" />
-            <FormError :messages="errors?.speed" />
+            <FormError :errors="errors?.speed" />
           </div>
           <div class="form-group">
             <input type="number" class="input" id="creature_capture_rate" v-model="creature.capture_rate" placeholder="Taux de capture" />
-            <FormError :messages="errors?.capture_rate" />
+            <FormError :errors="errors?.capture_rate" />
           </div>
           <div class="form-group">
             <a-select ref="select" v-model:value="creature.type">
               <a-select-option v-for="type in types" :value="type">{{ $t("ENUMS.CREATURE_TYPE." + type) }}</a-select-option>
             </a-select>
-            <FormError :messages="errors?.type" />
+            <FormError :errors="errors?.type" />
           </div>
           <div class="form-group">
             <a-select ref="select" v-model:value="creature.race">
               <a-select-option v-for="race in races" :value="race">{{ $t("ENUMS.CREATURE_RACE." + race) }}</a-select-option>
             </a-select>
-            <FormError :messages="errors?.race" />
+            <FormError :errors="errors?.race" />
           </div>
         </div>
         <div class="form-upload">
@@ -134,7 +136,7 @@ async function submit() {
             </label>
           </div>
         </div>
-        <FormError :messages="errors?.avatar" />
+        <FormError :errors="errors?.avatar" />
       </div>
       <div class="form-group">
         <button type="submit" class="button">{{ props.id ? 'Editer' : 'Créer' }}</button>

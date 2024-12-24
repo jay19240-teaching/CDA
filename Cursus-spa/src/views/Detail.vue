@@ -7,6 +7,7 @@ import { type Creature } from '@/_models/Creature';
 import { CreatureRace, CreatureType } from '@/_models/Enums';
 import * as CreatureService from '@/_services/CreatureService';
 import { useNotifStore } from '@/stores/Notif';
+import { useUserStore } from '@/stores/User';
 import Image from '@/components/Image.vue';
 import { uploadedPath } from '@/env';
 
@@ -23,6 +24,7 @@ const actions = [{
 
 const route = useRoute();
 const notifStore = useNotifStore();
+const userStore = useUserStore();
 const currentAction = ref(actions[2]);
 const creature = ref<Creature>({
   id: -1,
@@ -68,9 +70,8 @@ async function destroy() {
         </span>
       </div>
 
-      <div class="detail-info-nav">
-        <router-link class="detail-info-nav-item"
-          :to="{ name: 'edit', params: { id: creature.id } }">Editer</router-link>
+      <div class="detail-info-nav" v-if="userStore.isLogged && userStore.user.id == creature.user?.id">
+        <router-link class="detail-info-nav-item" :to="{ name: 'edit', params: { id: creature.id } }">Editer</router-link>
         <div class="detail-info-nav-item" @click="destroy">Supprimer</div>
       </div>
     </div>
