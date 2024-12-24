@@ -8,8 +8,6 @@ services:
   vue-docker:
     container_name: vue-docker
     image: ghcr.io/jay19240-teaching/cda-spa:latest
-    environment:
-      VITE_API_BASE: "http://12.12.12.12"
     ports:
       - 80:80
 
