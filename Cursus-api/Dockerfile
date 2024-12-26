@@ -20,7 +20,7 @@ COPY . /var/www/app
 WORKDIR /var/www/app
 
 COPY .env.${MODE} .env
-COPY docker/vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY vhost.conf /etc/apache2/sites-available/000-default.conf
 
 RUN a2enmod rewrite
 
