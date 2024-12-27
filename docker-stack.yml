@@ -8,6 +8,17 @@ services:
     image: ghcr.io/jay19240-teaching/cda-spa-prod:latest
     ports:
       - 80:80
+      - 443:443
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email julien.rog24@gmail.com -d pokedex.blog --agree-tos
 
   mysql_db:
     image: mysql:latest
