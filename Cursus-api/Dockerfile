@@ -21,6 +21,7 @@ WORKDIR /var/www/app
 
 COPY .env.${MODE} .env
 COPY vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY ports.conf /etc/apache2/ports.conf
 
 RUN a2enmod rewrite
 
