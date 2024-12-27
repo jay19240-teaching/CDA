@@ -4,6 +4,7 @@ import * as CreatureService from '@/_services/CreatureService';
 import { useGuiStore } from '@/stores/Gui';
 import Image from '@/components/Image.vue';
 import { uploadedPath } from '@/env';
+import { type Creature } from '@/_models/Creature';
 
 const perPageList = [1, 3, 6, 12];
 
@@ -47,6 +48,24 @@ const prevActive = computed(() => {
 const nextActive = computed(() => {
   return pagination.value && page.value < pagination.value.maxPages;
 });
+
+function getFormattedId(id?: number, max: number = 4) {
+  let res = '';
+
+  if (!id) {
+    for (let i = 0; i < max; i++) res += '-';
+    return '#' + res;
+  }
+
+  const idStringLength = String(id).length;
+  res = String(id);
+
+  for (var i = 0; i < (max - idStringLength); i++) {
+    res = '0' + res;
+  }
+
+  return '#' + res;
+}
 
 function toggleFilters() {
   filtersOpened.value = !filtersOpened.value;
@@ -166,7 +185,7 @@ function search() {
     <router-link :to="{ name: 'creatures-show', params: { id: creature.id }}" v-if="pagination" v-for="creature in pagination.creatures" :key="creature.id" class="pokecard">
       <Image :src="creature.avatar" default-src="default.jpg" :path="uploadedPath" class="pokecard-picture"/>
       <div class="pokecard-name">{{ creature.name }}</div>
-      <div class="pokecard-id">#0{{ creature.id }}</div>
+      <div class="pokecard-id">{{ getFormattedId(creature.id, 4) }}</div>
     </router-link>
   </div>
 
