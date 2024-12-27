@@ -3,6 +3,7 @@ services:
     container_name: laravel-docker
     build: ./Cursus-api
 
+
   vue-docker:
     container_name: vue-docker
     build: ./Cursus-spa
