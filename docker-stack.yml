@@ -1,28 +1,51 @@
 services:
+  traefik:
+    image: traefik:v2.10
+    container_name: traefik
+    command:
+      - "--api.insecure=true"  # Dashboard activé (à désactiver en prod si non sécurisé)
+      - "--providers.docker=true"  # Active le support Docker
+      - "--providers.docker.exposedbydefault=false"  # Par défaut, les services ne sont pas exposés
+      - "--entrypoints.web.address=:80"  # HTTP
+      - "--entrypoints.websecure.address=:443"  # HTTPS
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.email=your-email@example.com"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"  # Accès au socket Docker
+      - "./letsencrypt:/letsencrypt"  # Stockage des certificats
+    networks:
+      - app_network
+
   laravel-docker:
     image: ghcr.io/jay19240-teaching/cda-api-prod:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.laravel-docker.rule=Host(`api.pokedex.blog`)"
+      - "traefik.http.routers.laravel-docker.entrypoints=websecure"
+      - "traefik.http.routers.laravel-docker.tls.certresolver=letsencrypt"
+      - "traefik.http.services.laravel-docker.loadbalancer.server.port=8000"
+    networks:
+      - app_network
     ports:
       - 8000:80
 
   vue-docker:
     image: ghcr.io/jay19240-teaching/cda-spa-prod:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vue-docker.rule=Host(`pokedex.blog`)"
+      - "traefik.http.routers.vue-docker.entrypoints=websecure"
+      - "traefik.http.routers.vue-docker.tls.certresolver=letsencrypt"
+      - "traefik.http.services.vue-docker.loadbalancer.server.port=8001"
+    networks:
+      - app_network
     ports:
       - 8001:80
-
-  proxy:
-    image: nginx
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email julien.rog24@gmail.com -d pokedex.blog --agree-tos
 
   mysql_db:
     image: mysql:latest
@@ -31,3 +54,7 @@ services:
       MYSQL_DATABASE: laravel
     ports:
       - 3306:3306
+
+networks:
+  app_network:
+    driver: bridge
