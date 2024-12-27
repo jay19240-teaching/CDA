@@ -32,9 +32,9 @@ const form = ref({
 });
 
 onMounted(async () => {
-  races.value = await CreatureService.getRaces();
-  types.value = await CreatureService.getTypes();
-  await fetchCreatures();
+  // races.value = await CreatureService.getRaces();
+  // types.value = await CreatureService.getTypes();
+  // await fetchCreatures();
 
   const guiStore = useGuiStore();
   guiStore.gui.title = 'Bestiaire';
