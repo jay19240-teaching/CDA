@@ -185,7 +185,7 @@ function search() {
     <router-link :to="{ name: 'creatures-show', params: { id: creature.id }}" v-if="pagination" v-for="creature in pagination.creatures" :key="creature.id" class="pokecard">
       <Image :src="creature.avatar" default-src="default.jpg" :path="uploadedPath" class="pokecard-picture"/>
       <div class="pokecard-name">{{ creature.name }}</div>
-      <div class="pokecard-id">{{ getFormattedId(creature.id, 4) }}</div>
+      <div class="pokecard-id">{{ getFormattedId(creature.id, 5) }}</div>
     </router-link>
   </div>
 
