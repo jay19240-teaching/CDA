@@ -35,7 +35,8 @@ class CreatureController extends Controller
 
         $creature->save();
 
-        event(new AdminNotified());
+        // event(new AdminNotified());
+        broadcast(new AdminNotified())->toOthers();
         return response()->json($creature);
     }
 

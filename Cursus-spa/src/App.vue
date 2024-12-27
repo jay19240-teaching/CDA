@@ -10,7 +10,7 @@ import { loadAll } from "@tsparticles/all";
 import config from './config/tsparticles';
 import router from './router';
 import * as AccountService from '@/_services/AccountService';
-import WS from '@/_services/WSService';
+import WSService from '@/_services/WSService';
 
 const [api, contextHolder] = notification.useNotification();
 const menuOpened = ref(false);
@@ -46,7 +46,7 @@ onMounted(async () => {
   await loadAll(tsParticles);
   await tsParticles.load(config);
 
-  WS.channel('notification.' + userStore.user.id)
+  WSService.channel('notification.' + userStore.user.id)
   .listen('.admin-notified', (e: string) => {
     notifStore.setMessage('Un utilisateur vient d\'ajouter un pokemon à ta collection !');
   });
