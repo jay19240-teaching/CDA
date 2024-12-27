@@ -27,7 +27,6 @@ RUN a2enmod rewrite
 RUN chown -R www-data:www-data /var/www/app \
     && chmod -R 775 /var/www/app/storage
 
-
 # install composer
 COPY --from=composer:2.6.5 /usr/bin/composer /usr/local/bin/composer
 

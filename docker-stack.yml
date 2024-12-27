@@ -31,8 +31,6 @@ services:
       - "traefik.http.services.laravel-docker.loadbalancer.server.port=8000"
     networks:
       - app_network
-    ports:
-      - 8000:80
 
   vue-docker:
     image: ghcr.io/jay19240-teaching/cda-spa-prod:latest
@@ -41,11 +39,9 @@ services:
       - "traefik.http.routers.vue-docker.rule=Host(`pokedex.blog`)"
       - "traefik.http.routers.vue-docker.entrypoints=websecure"
       - "traefik.http.routers.vue-docker.tls.certresolver=letsencrypt"
-      - "traefik.http.services.vue-docker.loadbalancer.server.port=8001"
+      - "traefik.http.services.vue-docker.loadbalancer.server.port=3000"
     networks:
       - app_network
-    ports:
-      - 8001:80
 
   mysql_db:
     image: mysql:latest
@@ -57,4 +53,4 @@ services:
 
 networks:
   app_network:
-    driver: bridge
+    driver: overlay
