@@ -154,13 +154,13 @@ async function login(user, credentials) {
   await Axios.get('/logout');
 
   const res = await Axios.get('/sanctum/csrf-cookie', {
-    baseURL: 'http://localhost:8080'
+    baseURL: 'http://localhost:8000'
   });
 
   Axios.defaults.headers.cookie = res.headers['set-cookie'];
   Axios.defaults.headers.common['X-XSRF-TOKEN'] = parseCSRFToken(res.headers['set-cookie']);
-  Axios.defaults.headers.common['Origin'] = 'http://localhost:8080';
-  Axios.defaults.headers.common['Referer'] = 'http://localhost:8080';
+  Axios.defaults.headers.common['Origin'] = 'http://localhost:8000';
+  Axios.defaults.headers.common['Referer'] = 'http://localhost:8000';
 
   const auth = await Axios.post('/login', credentials, {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
