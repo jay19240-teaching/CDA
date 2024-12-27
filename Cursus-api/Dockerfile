@@ -21,7 +21,6 @@ WORKDIR /var/www/app
 
 COPY .env.${MODE} .env
 COPY vhost.conf /etc/apache2/sites-available/000-default.conf
-COPY ports.conf /etc/apache2/ports.conf
 
 RUN a2enmod rewrite
 
@@ -31,7 +30,6 @@ RUN chown -R www-data:www-data /var/www/app \
 # install composer
 COPY --from=composer:2.6.5 /usr/bin/composer /usr/local/bin/composer
 
-EXPOSE 8000
 # copy composer.json to workdir & install dependencies
 COPY composer.json ./
 RUN composer install

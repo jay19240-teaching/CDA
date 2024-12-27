@@ -28,7 +28,7 @@ services:
       - "traefik.http.routers.laravel-docker.rule=Host(`api.pokedex.blog`)"
       - "traefik.http.routers.laravel-docker.entrypoints=websecure"
       - "traefik.http.routers.laravel-docker.tls.certresolver=letsencrypt"
-      - "traefik.http.services.laravel-docker.loadbalancer.server.port=8000"
+      - "traefik.http.services.laravel-docker.loadbalancer.server.port=80"
     networks:
       - app_network
 
@@ -39,7 +39,7 @@ services:
       - "traefik.http.routers.vue-docker.rule=Host(`pokedex.blog`)"
       - "traefik.http.routers.vue-docker.entrypoints=websecure"
       - "traefik.http.routers.vue-docker.tls.certresolver=letsencrypt"
-      - "traefik.http.services.vue-docker.loadbalancer.server.port=3000"
+      - "traefik.http.services.vue-docker.loadbalancer.server.port=80"
     networks:
       - app_network
 

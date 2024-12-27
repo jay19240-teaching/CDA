@@ -2,11 +2,14 @@ services:
   laravel-docker:
     container_name: laravel-docker
     build: ./Cursus-api
-
+    ports:
+      - 8000:80
 
   vue-docker:
     container_name: vue-docker
     build: ./Cursus-spa
+    ports:
+      - 3000:80
 
   mysql_db:
     image: mysql:latest
