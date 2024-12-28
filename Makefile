@@ -9,7 +9,8 @@ init-publish:
 	docker context use pokedex-site
 publish:
 	docker context use pokedex-site
-	docker compose -f ./docker-stack.yml up
+	docker-compose down --rmi all
+	docker compose -f ./docker-stack.yml up -d
 publish-data:
-	docker exec $(shell docker ps --filter "name=^pokedex_laravel-docker" --quiet) bash -c "php artisan migrate"
-	docker exec $(shell docker ps --filter "name=^pokedex_laravel-docker" --quiet) bash -c "php artisan db:seed"
+	docker exec $(shell docker ps --filter "name=^pokedex-laravel-docker" --quiet) bash -c "php artisan migrate"
+	docker exec $(shell docker ps --filter "name=^pokedex-laravel-docker" --quiet) bash -c "php artisan db:seed"
