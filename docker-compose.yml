@@ -9,7 +9,7 @@ services:
     container_name: vue-docker
     build: ./Cursus-spa
     ports:
-      - 3000:80
+      - 80:80
 
   mysql_db:
     image: mysql:latest
