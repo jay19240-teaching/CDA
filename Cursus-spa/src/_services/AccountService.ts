@@ -19,7 +19,7 @@ export async function login(credentials: { email: string, password: string }): P
 }
 
 export async function getUser() {
-  const res = await Axios.get('/user', { validateStatus:null });
+  const res = await Axios.get('/user');
   return res;
 }
 
