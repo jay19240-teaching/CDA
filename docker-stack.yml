@@ -1,6 +1,7 @@
 services:
   laravel-docker:
     image: ghcr.io/jay19240-teaching/cda-api-prod:latest
+    restart: on-failure
     ports:
       - 8000:80
     depends_on:
@@ -14,6 +15,7 @@ services:
 
   vue-docker:
     image: ghcr.io/jay19240-teaching/cda-spa-prod:latest
+    restart: on-failure
     ports:
       - 8001:80
     depends_on:
@@ -27,14 +29,16 @@ services:
 
   mysql_db:
     image: mysql:latest
+    restart: on-failure
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: laravel@232425
       MYSQL_DATABASE: laravel
     ports:
       - 3306:3306
 
   traefik:
     image: traefik:v3.2
+    restart: on-failure
     command:
       - "--api.insecure=true"
       - "--providers.docker=true"
