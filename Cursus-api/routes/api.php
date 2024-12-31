@@ -54,4 +54,6 @@ Route::middleware(['throttle:api', 'auth:sanctum'])->group(function () {
         Route::put('/{creature}', 'update');
         Route::delete('/{creature}', 'destroy');        
     });
+
+    Route::get('/user', [AuthController::class, 'user']);
 });

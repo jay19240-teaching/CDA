@@ -4,6 +4,7 @@ import * as View from '@/views';
 import Login from '@/views/Login.vue';
 import { useUserStore } from '@/stores/User';
 import { creatureResolver } from '@/_resolvers/CreatureResolver';
+import * as AccountService from '@/_services/AccountService';
 // -------------------------------------------------------------
 
 const router = createRouter({
@@ -12,7 +13,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: View.Home
+      component: View.Home,
+      meta: { requiredLogin: false }
     },
     {
       path: '/creatures-show/:id(\\d+)',
@@ -34,18 +36,22 @@ const router = createRouter({
 });
 
 // Gestion du guard
-router.beforeEach((to, from, next) => {
+router.beforeResolve(async (to, from, next) => {
   const userStore = useUserStore();
-  const role = userStore.user.role;
+  const res = await AccountService.getUser();
+  userStore.setUser(res.data);
 
-  if (!to.meta.role) {
-    return next();
-  }
-  else if (role == to.meta.role) {
+  if (!to.meta.requiredLogin) {
     return next();
   }
 
-  router.push('/login');
+  if (userStore.user.role == to.meta.role) {
+    return next();
+  }
+
+  if (!userStore.isLogged && to.name !== 'Login') {
+    return '/login';
+  }
 });
 
 export default router;

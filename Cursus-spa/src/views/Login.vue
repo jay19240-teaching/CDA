@@ -27,13 +27,21 @@ async function login() {
       router.push('/');
     });
   } catch(error: any) {
-    errors.value = error.response.data.errors;
+    if (error.response.status == 401) {
+      errors.value.general = 'Identifiant ou mot de passe incorrect.';
+    }
+    else {
+      errors.value = error.response.data.errors;
+    }    
   }
 }
 </script>
 
 <template>
   <div class="top-container">
+    <div v-if="errors.general" class="text-center text-red-500 mb-5">
+      {{ errors.general }}
+    </div>
     <form @submit.prevent="login">
       <h2 class="form-title">Connexion</h2>
       <div class="form-group">

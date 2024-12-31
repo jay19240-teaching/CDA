@@ -18,6 +18,11 @@ export async function login(credentials: { email: string, password: string }): P
   });
 }
 
+export async function getUser() {
+  const res = await Axios.get('/user', { validateStatus:null });
+  return res;
+}
+
 export async function logout() {  
   await Axios.get('/logout');
 
