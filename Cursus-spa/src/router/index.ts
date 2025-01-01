@@ -39,12 +39,12 @@ const router = createRouter({
 router.beforeResolve(async (to, from, next) => {
   const userStore = useUserStore();
 
-  try {
-    const res = await AccountService.getUser();
-    userStore.setUser(res.data);
-  } catch(err) {
-    userStore.clearUser();
-  }
+  // try {
+  //   const res = await AccountService.getUser();
+  //   userStore.setUser(res.data);
+  // } catch(err) {
+  //   userStore.clearUser();
+  // }
 
   if (!to.meta.requiredLogin) {
     return next();
