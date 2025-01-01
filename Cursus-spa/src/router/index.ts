@@ -38,8 +38,13 @@ const router = createRouter({
 // Gestion du guard
 router.beforeResolve(async (to, from, next) => {
   const userStore = useUserStore();
-  const res = await AccountService.getUser();
-  userStore.setUser(res.data);
+
+  try {
+    const res = await AccountService.getUser();
+    userStore.setUser(res.data);
+  } catch(err) {
+    userStore.clearUser();
+  }
 
   if (!to.meta.requiredLogin) {
     return next();

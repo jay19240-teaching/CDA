@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as AccountService from '@/_services/AccountService';
-import router from '@/router';
 
 const Axios = axios.create({
   baseURL: import.meta.env.VITE_API_BASE + '/api',
