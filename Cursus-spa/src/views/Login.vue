@@ -22,17 +22,11 @@ onMounted(async () => {
 
 async function login() {
   try {
-    await AccountService.login(auth.value).then(() => {
-      notifStore.setMessage('Connexion réussie !');
-      router.push('/');
-    });
+    await AccountService.login(auth.value);
+    notifStore.setMessage('Connexion réussie !');
+    router.push('/');
   } catch(error: any) {
-    if (error.response.status == 401) {
-      errors.value.general = 'Identifiant ou mot de passe incorrect.';
-    }
-    else {
-      errors.value = error.response.data.errors;
-    }    
+    errors.value = error.response.data.errors;  
   }
 }
 </script>
