@@ -5,6 +5,7 @@ import { useGuiStore } from '@/stores/Gui';
 import { useNotifStore } from '@/stores/Notif';
 import * as AccountService from '@/_services/AccountService';
 import FormError from '@/components/FormError.vue';
+import { handleError } from '@/_utils/errors-handler';
 
 const auth = ref({
   email: '',
@@ -25,8 +26,9 @@ async function login() {
     await AccountService.login(auth.value);
     notifStore.setMessage('Connexion réussie !');
     router.push('/');
-  } catch(error: any) {
-    errors.value = error.response.data.errors;  
+  } catch(axiosError: any) {
+    notifStore.setMessage('Echec de connexion !');
+    errors.value = handleError(axiosError);
   }
 }
 </script>

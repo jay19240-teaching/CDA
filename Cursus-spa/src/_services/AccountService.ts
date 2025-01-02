@@ -2,7 +2,6 @@ import Axios from './CallerService';
 import { useUserStore } from '@/stores/User';
 
 export async function login(credentials: { email: string, password: string }): Promise<void> {
-  await logout();
   await Axios.get('/sanctum/csrf-cookie', {
     baseURL: import.meta.env.VITE_API_BASE
   });
@@ -20,8 +19,7 @@ export async function login(credentials: { email: string, password: string }): P
 }
 
 export async function getUser() {
-  const res = await Axios.get('/user');
-  return res;
+  return await Axios.get('/user');
 }
 
 export async function logout() {  

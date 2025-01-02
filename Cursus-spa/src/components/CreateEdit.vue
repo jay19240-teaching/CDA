@@ -9,6 +9,7 @@ import * as CreatureService from '@/_services/CreatureService';
 import { useGuiStore } from '@/stores/Gui';
 import FormError from '@/components/FormError.vue';
 import { uploadedPath } from '@/env';
+import { handleError } from '@/_utils/errors-handler';
 
 const props = defineProps(['id']);
 const types = Object.values(CreatureType);
@@ -53,9 +54,9 @@ async function create() {
     notifStore.setMessage('Créature ajoutée !');
     errors.value = {};
     router.push('/');
-  } catch(error: any) {
+  } catch(axiosError: any) {
     notifStore.setMessage('Echec de soumission !');
-    errors.value = error.response.data.errors;
+    errors.value = handleError(axiosError);
   }
 }
 
@@ -65,9 +66,9 @@ async function edit() {
     notifStore.setMessage('Créature éditée !');
     errors.value = {};
     router.push('/creatures-show/' + creature.value.id);
-  } catch(error: any) {
+  } catch(axiosError: any) {
     notifStore.setMessage('Echec de soumission !');
-    errors.value = error.response.data.errors;
+    errors.value = handleError(axiosError);
   }
 }
 
