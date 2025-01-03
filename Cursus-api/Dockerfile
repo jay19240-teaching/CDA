@@ -33,5 +33,5 @@ COPY --from=composer:2.6.5 /usr/bin/composer /usr/local/bin/composer
 # copy composer.json to workdir & install dependencies
 COPY composer.json ./
 RUN composer install
-RUN composer install symfony/filesystem
+RUN composer require symfony/filesystem
 RUN php artisan storage:link --relative
