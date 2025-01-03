@@ -33,3 +33,4 @@ COPY --from=composer:2.6.5 /usr/bin/composer /usr/local/bin/composer
 # copy composer.json to workdir & install dependencies
 COPY composer.json ./
 RUN composer install
+RUN php artisan storage:link
