@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
                 $dataPokemon = $resPokemon->json();
                 $attributes = [
                     'name' => $dataPokemon['name'],
-                    'user_id' => 1,
+                    'user_id' => random_int(1, 2),
                     'capture_rate' => 1,
                     'type' => CreatureTypeEnum::random(),
                     'race' => CreatureRaceEnum::random()
