@@ -1,1 +1,1 @@
-export const uploadedPath = (import.meta.env.VITE_UPLOADED_BASE);
+export const imagesPath = (import.meta.env.VITE_IMAGES_BASE);

@@ -11,13 +11,19 @@ use App\Http\Requests\CreatureUpdateRequest;
 use App\Http\Requests\CreatureDestroyRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CreatureController extends Controller
 {
     public function index()
     {
         return response()->json(Creature::all());
+    }
+
+    public function show(string $id)
+    {
+        $creature = Creature::with('user')->find($id);
+        return response()->json($creature);
     }
 
     public function store(CreatureStoreRequest $request)
@@ -30,7 +36,7 @@ class CreatureController extends Controller
         if ($request->file('avatar_blob')) {
             $fileName = time() . '_' . $request->avatar_blob->getClientOriginalName();
             $creature->avatar = $fileName;
-            $request->avatar_blob->move(public_path('images/uploads'), $fileName);
+            $request->file('avatar_blob')->storeAs('public/pokemons/images', $fileName);
         }
 
         $creature->save();
@@ -39,25 +45,19 @@ class CreatureController extends Controller
         return response()->json($creature);
     }
 
-    public function show(string $id)
-    {
-        $creature = Creature::with('user')->find($id);
-        return response()->json($creature);
-    }
-
     public function update(CreatureUpdateRequest $request, Creature $creature)
     {
         $formFields = $request->validated();
         $creature->fill($formFields);
 
-        if ($request->file('avatar_blob') && File::exists(public_path('images/uploads/' . $creature->avatar))) {
-            File::delete(public_path('images/uploads/' . $creature->avatar));
+        if ($request->file('avatar_blob') && Storage::has('public/pokemons/images/' . $creature->avatar)) {
+            Storage::delete('public/pokemons/images/' . $creature->avatar);
         }
 
         if ($request->file('avatar_blob')) {
             $fileName = time() . '_' . $request->avatar_blob->getClientOriginalName();
             $creature->avatar = $fileName;
-            $request->avatar_blob->move(public_path('images/uploads'), $fileName);
+            $request->file('avatar_blob')->storeAs('public/pokemons/images', $fileName);
         }
 
         $creature->save();
@@ -67,8 +67,9 @@ class CreatureController extends Controller
     public function destroy(CreatureDestroyRequest $request, Creature $creature)
     {
         $request->validated();
-        if (File::exists(public_path('images/uploads/' . $creature->avatar))) {
-            File::delete(public_path('images/uploads/' . $creature->avatar));
+
+        if (Storage::has('public/pokemons/images/' . $creature->avatar)) {
+            Storage::delete('public/pokemons/images/' . $creature->avatar);
         }
 
         $creature->delete();

@@ -8,7 +8,7 @@ import type { Creature } from '@/_models/Creature';
 import * as CreatureService from '@/_services/CreatureService';
 import { useGuiStore } from '@/stores/Gui';
 import FormError from '@/components/FormError.vue';
-import { uploadedPath } from '@/env';
+import { imagesPath } from '@/env';
 import { handleError } from '@/_utils/errors-handler';
 
 const props = defineProps(['id']);
@@ -124,7 +124,7 @@ async function submit() {
             <label for="dropzone-file"
               class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
               <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                <img v-if="creature.avatar" class="max-w-[70%] max-h-[80%]" :src="uploadedPath + creature.avatar" />
+                <img v-if="creature.avatar" class="max-w-[70%] max-h-[80%]" :src="imagesPath + creature.avatar" />
                 <div v-if="!creature?.avatar" class="flex flex-col items-center justify-center">
                   <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -134,7 +134,6 @@ async function submit() {
                   <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Cliquez pour télé-verser une image</span></p>
                   <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                 </div>
-
               </div>
               <input id="dropzone-file" type="file" class="hidden" ref="inputFile" @change="handleFileUpload($event)" />
             </label>

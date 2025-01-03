@@ -1,5 +1,7 @@
 dev:
 	make -j 2 artisan-serve vuejs
+seed:
+	cd Cursus-api && php artisan migrate:fresh --seed
 artisan-serve:
 	cd Cursus-api && php artisan serve
 vuejs:
@@ -13,5 +15,4 @@ publish:
 	docker system prune -a
 	docker compose -f ./docker-stack.yml up -d
 publish-data:
-	docker exec $(shell docker ps --filter "name=^pokedex-laravel-docker" --quiet) bash -c "php artisan migrate"
-	docker exec $(shell docker ps --filter "name=^pokedex-laravel-docker" --quiet) bash -c "php artisan db:seed"
+	docker exec $(shell docker ps --filter "name=^pokedex-laravel-docker" --quiet) bash -c "php artisan migrate:fresh --seed"

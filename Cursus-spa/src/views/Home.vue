@@ -3,8 +3,7 @@ import { ref, onMounted, computed } from 'vue';
 import * as CreatureService from '@/_services/CreatureService';
 import { useGuiStore } from '@/stores/Gui';
 import Image from '@/components/Image.vue';
-import { uploadedPath } from '@/env';
-import { type Creature } from '@/_models/Creature';
+import { imagesPath } from '@/env';
 
 const perPageList = [1, 3, 6, 12];
 
@@ -188,7 +187,7 @@ function search() {
   </div>
   <div class="home-cards sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
     <router-link :to="{ name: 'creatures-show', params: { id: creature.id }}" v-if="pagination" v-for="creature in pagination.creatures" :key="creature.id" class="pokecard">
-      <Image :src="creature.avatar" default-src="default.jpg" :path="uploadedPath" class="pokecard-picture"/>
+      <Image :src="creature.avatar" default-src="default.jpg" :path="imagesPath" class="pokecard-picture"/>
       <div class="pokecard-name">{{ creature.name }}</div>
       <div class="pokecard-id">{{ getFormattedId(creature.id, 5) }}</div>
     </router-link>

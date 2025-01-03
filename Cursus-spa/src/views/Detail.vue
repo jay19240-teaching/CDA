@@ -9,7 +9,7 @@ import * as CreatureService from '@/_services/CreatureService';
 import { useNotifStore } from '@/stores/Notif';
 import { useUserStore } from '@/stores/User';
 import Image from '@/components/Image.vue';
-import { uploadedPath } from '@/env';
+import { imagesPath } from '@/env';
 
 const actions = [{
   mode: 'DESCRIPTION',
@@ -60,7 +60,7 @@ async function destroy() {
 
 <template>
   <div class="top-container">
-    <Image :src="creature.avatar" default-src="default.jpg" :path="uploadedPath"
+    <Image :src="creature.avatar" default-src="default.jpg" :path="imagesPath"
       class="detail-picture" />
     <div class="detail-info flex-col sm:flex-row">
       <div class="detail-info-name">
