@@ -16,3 +16,5 @@ publish:
 	docker compose -f ./docker-stack.yml up -d
 publish-data:
 	docker exec $(shell docker ps --filter "name=^pokedex-laravel-docker" --quiet) bash -c "php artisan migrate:fresh --seed"
+	docker exec $(shell docker ps --filter "name=^pokedex-laravel-docker" --quiet) bash -c "chmod -R 755 storage/app/public/"
+	docker exec $(shell docker ps --filter "name=^pokedex-laravel-docker" --quiet) bash -c "chown -R www-data:www-data storage/app/public/"

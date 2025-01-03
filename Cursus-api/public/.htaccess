@@ -4,7 +4,6 @@
     </IfModule>
 
     RewriteEngine On
-    Options +FollowSymLinks
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
