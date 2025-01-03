@@ -33,5 +33,4 @@ COPY --from=composer:2.6.5 /usr/bin/composer /usr/local/bin/composer
 # copy composer.json to workdir & install dependencies
 COPY composer.json ./
 RUN composer install
-RUN ln -sfn storage public/storage
-RUN chmod -R 775 storage
+RUN ln -sfn storage/app/public public/storage
