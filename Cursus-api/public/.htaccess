@@ -3,8 +3,8 @@
         Options -MultiViews -Indexes
     </IfModule>
 
-    Options +FollowSymLinks
     RewriteEngine On
+    Options +FollowSymLinks
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
