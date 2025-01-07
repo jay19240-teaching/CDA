@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import router from '@/router';
 import { useGuiStore } from '@/stores/Gui';
 import { useNotifStore } from '@/stores/Notif';
+import { useUserStore } from '@/stores/User';
 import * as AccountService from '@/_services/AccountService';
 import * as WSService from '@/_services/WSService';
 import FormError from '@/components/FormError.vue';
@@ -18,8 +19,14 @@ const notifStore = useNotifStore();
 
 onMounted(async () => {
   const guiStore = useGuiStore();
+  const userStore = useUserStore();
+
   guiStore.gui.title = '';
   guiStore.gui.titleHasBack = false;
+
+  if (userStore.isLogged) {
+    router.push('/');
+  }
 });
 
 async function login() {

@@ -22,9 +22,9 @@ const router = createRouter({
       props: true,
       beforeEnter: creatureResolver
     },
-    { path: '/create', name: 'create', component: View.Create },
-    { path: '/edit/:id', name: 'edit', component: View.Edit, props: true },
-    { path: '/settings', name: 'settings', component: View.Settings },
+    { path: '/create', name: 'create', component: View.Create, meta: { roles: ['ROLE_USER', 'ROLE_ADMIN'] } },
+    { path: '/edit/:id', name: 'edit', component: View.Edit, meta: { roles: ['ROLE_USER', 'ROLE_ADMIN'] }, props: true },
+    { path: '/settings', name: 'settings', component: View.Settings, meta: { roles: ['ROLE_USER', 'ROLE_ADMIN'] } },
     {
       path: '/login', name: 'login', component: Login
     },
@@ -45,17 +45,19 @@ router.beforeResolve(async (to, from, next) => {
     userStore.clearUser();
   }
 
-  if (!userStore.isLogged && to.name !== 'Login') {
+  if (!userStore.isLogged && to.meta.roles && to.name !== 'Login') {
     return '/login';
   }
 
-  if (userStore.isLogged && to.name === 'Login') {
-    return '/';
-  }
-
-  if (!to.meta.role || userStore.user.role == to.meta.role) {
+  if (!to.meta.roles) {
     return next();
   }
+
+  if (to.meta.roles instanceof Array && to.meta.roles.indexOf(userStore.user.role) != -1) {
+    return next();
+  }
+
+  return '/forbidden';
 });
 
 export default router;
