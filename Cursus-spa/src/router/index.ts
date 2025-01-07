@@ -13,8 +13,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: View.Home,
-      meta: { requiredLogin: false }
+      component: View.Home
     },
     {
       path: '/creatures-show/:id(\\d+)',
@@ -46,16 +45,16 @@ router.beforeResolve(async (to, from, next) => {
     userStore.clearUser();
   }
 
-  if (!to.meta.requiredLogin) {
-    return next();
-  }
-
-  if (userStore.user.role == to.meta.role) {
-    return next();
-  }
-
   if (!userStore.isLogged && to.name !== 'Login') {
     return '/login';
+  }
+
+  if (userStore.isLogged && to.name === 'Login') {
+    return '/';
+  }
+
+  if (!to.meta.role || userStore.user.role == to.meta.role) {
+    return next();
   }
 });
 
