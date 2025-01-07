@@ -145,7 +145,7 @@ function search() {
       <div class="home-search-filters" :class="{ active: filtersOpened }">
         <div class="p-2">
           <div class="home-search-filters-title">
-            Types22:
+            Types:
           </div>
           <div class="grid grid-cols-3 gap-1 mb-4">
             <div v-for="type in types" class="home-search-filters-item">
