@@ -9,7 +9,7 @@ import { loadAll } from "@tsparticles/all";
 import config from './config/tsparticles';
 import router from './router';
 import * as AccountService from '@/_services/AccountService';
-import WSService from '@/_services/WSService';
+import * as WSService from '@/_services/WSService';
 
 const menuOpened = ref(false);
 const guiStore = useGuiStore();
@@ -25,13 +25,13 @@ function back() {
 }
 
 async function goto(name: string) {
-  toggleMenu();
+  menuOpened.value = false;
   router.push({ name: name });
 }
 
 async function logout() {
   await AccountService.logout();
-  toggleMenu();
+  menuOpened.value = false;
   notifStore.pushMessage('Déconnexion réussie !');
   router.push('/');
 }
@@ -39,11 +39,7 @@ async function logout() {
 onMounted(async () => {
   await loadAll(tsParticles);
   await tsParticles.load(config);
-
-  WSService.channel('notification.' + userStore.user.id)
-  .listen('.admin-notified', (e: string) => {
-    notifStore.pushMessage('Un utilisateur vient d\'ajouter un pokemon à ta collection !');
-  });
+  WSService.subscribeNotifications();
 });
 </script>
 

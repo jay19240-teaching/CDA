@@ -4,6 +4,7 @@ import router from '@/router';
 import { useGuiStore } from '@/stores/Gui';
 import { useNotifStore } from '@/stores/Notif';
 import * as AccountService from '@/_services/AccountService';
+import * as WSService from '@/_services/WSService';
 import FormError from '@/components/FormError.vue';
 import { handleError } from '@/_utils/errors-handler';
 
@@ -25,6 +26,7 @@ async function login() {
   try {
     await AccountService.login(auth.value);
     notifStore.pushMessage('Connexion réussie !');
+    WSService.subscribeNotifications();
     router.push('/');
   } catch(axiosError: any) {
     notifStore.pushMessage('Echec de connexion !');
