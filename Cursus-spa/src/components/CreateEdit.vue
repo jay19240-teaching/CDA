@@ -51,11 +51,11 @@ function handleFileUpload(event: any) {
 async function create() {
   try {
     await CreatureService.createCreature(creature.value);
-    notifStore.setMessage('Créature ajoutée !');
+    notifStore.pushMessage('Créature ajoutée !');
     errors.value = {};
     router.push('/');
   } catch(axiosError: any) {
-    notifStore.setMessage('Echec de soumission !');
+    notifStore.pushMessage('Echec de soumission !');
     errors.value = handleError(axiosError);
   }
 }
@@ -63,11 +63,11 @@ async function create() {
 async function edit() {
   try {
     await CreatureService.updateCreature(creature.value);
-    notifStore.setMessage('Créature éditée !');
+    notifStore.pushMessage('Créature éditée !');
     errors.value = {};
     router.push('/creatures-show/' + creature.value.id);
   } catch(axiosError: any) {
-    notifStore.setMessage('Echec de soumission !');
+    notifStore.pushMessage('Echec de soumission !');
     errors.value = handleError(axiosError);
   }
 }

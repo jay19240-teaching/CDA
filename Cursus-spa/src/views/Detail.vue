@@ -52,7 +52,7 @@ function changeAction(action: any) {
 async function destroy() {
   if (creature.value.id) {
     await CreatureService.deleteCreature(creature.value.id);
-    notifStore.setMessage('Créature supprimée !');
+    notifStore.pushMessage('Créature supprimée !');
     router.push('/');
   }
 }

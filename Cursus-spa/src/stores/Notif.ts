@@ -3,15 +3,22 @@ import { defineStore } from 'pinia';
 
 export const useNotifStore = defineStore('Notif', () => {
   const notif = ref({
-    message: ''
+    messages: new Array<string>(),
+    count: 0
   });
 
-  function setMessage(message: string) {
-    notif.value.message = message;
+  function pushMessage(message: string) {
+    notif.value.messages.push(message);
+    notif.value.count++;
+
+    setTimeout(() => {
+      notif.value.messages.splice(notif.value.count - 1, 1);
+      notif.value.count--;
+    }, 1000);
   }
 
   return {
     notif,
-    setMessage
+    pushMessage
   };
 });

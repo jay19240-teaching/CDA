@@ -157,9 +157,9 @@ function create() {
   errors.value = {};
 
   CreatureService.createCreature(creature.value).then(() => {
-    notifStore.setMessage('Créature crée avec succès');
+    notifStore.pushMessage('Créature crée avec succès');
   }).catch(error => {
-    notifStore.setMessage('Données invalides');
+    notifStore.pushMessage('Données invalides');
     errors.value = error.response.data.errors;
   });
 }
@@ -259,9 +259,9 @@ La fonction `create`:
 function create() {
   errors.value = {};
   CreatureService.createCreature(creature.value).then(() => {
-    notifStore.setMessage('Créature crée avec succès');
+    notifStore.pushMessage('Créature crée avec succès');
   }).catch((error) => {
-    notifStore.setMessage('Données invalides');
+    notifStore.pushMessage('Données invalides');
     errors.value = error.response.data.errors;
   });
 }
@@ -326,9 +326,9 @@ function handleFileUpload (event: any) {
 function update() {
   errors.value = {};
   CreatureService.updateCreature(creature.value).then((res) => {
-    notifStore.setMessage('Créature éditée avec succès');
+    notifStore.pushMessage('Créature éditée avec succès');
   }).catch(error => {
-    notifStore.setMessage('Données invalides');
+    notifStore.pushMessage('Données invalides');
     errors.value = error.response.data.errors;
   });
 }

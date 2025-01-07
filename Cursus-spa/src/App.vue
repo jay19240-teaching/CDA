@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
 import { ref, onMounted } from 'vue';
-import { notification } from 'ant-design-vue';
 import { useGuiStore } from '@/stores/Gui';
 import { useUserStore } from '@/stores/User';
 import { useNotifStore } from '@/stores/Notif';
@@ -12,7 +11,6 @@ import router from './router';
 import * as AccountService from '@/_services/AccountService';
 import WSService from '@/_services/WSService';
 
-const [api, contextHolder] = notification.useNotification();
 const menuOpened = ref(false);
 const guiStore = useGuiStore();
 const userStore = useUserStore();
@@ -26,10 +24,6 @@ function back() {
   router.go(-1);
 }
 
-notifStore.$subscribe((mutation, state) => {
-  api.info({ message: state.notif.message });
-});
-
 async function goto(name: string) {
   toggleMenu();
   router.push({ name: name });
@@ -38,7 +32,7 @@ async function goto(name: string) {
 async function logout() {
   await AccountService.logout();
   toggleMenu();
-  notifStore.setMessage('Déconnexion réussie !');
+  notifStore.pushMessage('Déconnexion réussie !');
   router.push('/');
 }
 
@@ -48,7 +42,7 @@ onMounted(async () => {
 
   WSService.channel('notification.' + userStore.user.id)
   .listen('.admin-notified', (e: string) => {
-    notifStore.setMessage('Un utilisateur vient d\'ajouter un pokemon à ta collection !');
+    notifStore.pushMessage('Un utilisateur vient d\'ajouter un pokemon à ta collection !');
   });
 });
 </script>
@@ -67,7 +61,11 @@ onMounted(async () => {
     </div>
   </header>
   <RouterView />
-  <contextHolder />
+  <div class="fixed right-5 top-5 z-[100000]">
+    <div v-for="message of notifStore.notif.messages" class="notification">
+      {{ message }}
+    </div>
+  </div>
   <div class="nav">
     <button class="nav-btn" @click="toggleMenu" :class="{ active: menuOpened }">
       <span class="material-symbols-outlined nav-btn-icon nav-btn-icon--open">menu</span>

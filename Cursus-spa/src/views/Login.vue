@@ -24,10 +24,10 @@ onMounted(async () => {
 async function login() {
   try {
     await AccountService.login(auth.value);
-    notifStore.setMessage('Connexion réussie !');
+    notifStore.pushMessage('Connexion réussie !');
     router.push('/');
   } catch(axiosError: any) {
-    notifStore.setMessage('Echec de connexion !');
+    notifStore.pushMessage('Echec de connexion !');
     errors.value = handleError(axiosError);
   }
 }

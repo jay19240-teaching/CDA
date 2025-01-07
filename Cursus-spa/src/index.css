@@ -43,7 +43,7 @@ textarea:focus, input:focus{
 }
 
 /* --------------------------------------------------------------------------
-// HOME
+// HEADER
 // ------------------------------------------------------------------------*/
 .header {
     border-radius: 2.5rem;
@@ -687,4 +687,20 @@ textarea:focus, input:focus{
     color: red;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+/* --------------------------------------------------------------------------
+// NOTIFICATION
+// ------------------------------------------------------------------------*/
+.notification {
+    position: relative;
+    background-color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    min-width: 300px;
+    max-width: 300px;
+    line-height: 1.5;
+    @apply border-delta;
 }
