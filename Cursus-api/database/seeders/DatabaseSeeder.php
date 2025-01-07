@@ -12,7 +12,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
@@ -66,7 +66,8 @@ class DatabaseSeeder extends Seeder
                 if ($dataPokemon['sprites']['front_default']) {
                     $resImage = Http::get($dataPokemon['sprites']['front_default']);
                     $bodyImage = (string) $resImage->body();
-                    Storage::put('public/pokemons/images/' . $dataPokemon['name'] . '.png', $bodyImage);
+
+                    File::put(public_path(env('PUBLIC_IMAGES_PATH')) . $dataPokemon['name'] . '.png', $bodyImage);
                     $attributes['avatar'] = $dataPokemon['name'] . '.png';
                 }
 

@@ -11,10 +11,16 @@ use App\Http\Requests\CreatureUpdateRequest;
 use App\Http\Requests\CreatureDestroyRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class CreatureController extends Controller
 {
+    private string $imagesPath;
+
+    function __construct() {
+        $this->imagesPath = public_path(env('PUBLIC_IMAGES_PATH'));
+    }
+
     public function index()
     {
         return response()->json(Creature::all());
@@ -36,7 +42,7 @@ class CreatureController extends Controller
         if ($request->file('avatar_blob')) {
             $fileName = time() . '_' . $request->avatar_blob->getClientOriginalName();
             $creature->avatar = $fileName;
-            $request->file('avatar_blob')->storeAs('public/pokemons/images', $fileName);
+            $request->avatar_blob->move($this->imagesPath, $fileName);
         }
 
         $creature->save();
@@ -50,14 +56,14 @@ class CreatureController extends Controller
         $formFields = $request->validated();
         $creature->fill($formFields);
 
-        if ($request->file('avatar_blob') && Storage::has('public/pokemons/images/' . $creature->avatar)) {
-            Storage::delete('public/pokemons/images/' . $creature->avatar);
+        if ($request->file('avatar_blob') && File::exists($this->imagesPath . $creature->avatar)) {
+            File::delete($this->imagesPath . $creature->avatar);
         }
 
         if ($request->file('avatar_blob')) {
             $fileName = time() . '_' . $request->avatar_blob->getClientOriginalName();
             $creature->avatar = $fileName;
-            $request->file('avatar_blob')->storeAs('public/pokemons/images', $fileName);
+            $request->avatar_blob->move($this->imagesPath, $fileName);
         }
 
         $creature->save();
@@ -68,8 +74,8 @@ class CreatureController extends Controller
     {
         $request->validated();
 
-        if (Storage::has('public/pokemons/images/' . $creature->avatar)) {
-            Storage::delete('public/pokemons/images/' . $creature->avatar);
+        if (File::exists($this->imagesPath . $creature->avatar)) {
+            File::delete($this->imagesPath . $creature->avatar);
         }
 
         $creature->delete();
