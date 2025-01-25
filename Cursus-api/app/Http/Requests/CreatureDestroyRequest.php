@@ -21,7 +21,7 @@ class CreatureDestroyRequest extends FormRequest
         {
             return true;
         }
-        
+
         return false;
     }
 }
