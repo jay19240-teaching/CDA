@@ -17,7 +17,7 @@ jobs:
     - name: Install Docker
       uses: hoverkraft-tech/compose-action@v2.0.1
     - name: Sleep for 10 seconds
-      run: sleep 10s
+      run: sleep 12s
       shell: bash
     - name: Database migrate
       run: docker exec laravel-docker bash -c "php artisan migrate"

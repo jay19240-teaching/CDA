@@ -6,6 +6,10 @@ artisan-serve:
 	cd Cursus-api && php artisan serve
 vuejs:
 	cd Cursus-spa && npm run dev
+test:
+	cd Cursus-api && php artisan migrate:fresh --seed
+	cd ..
+	cd Tests-api && npm run test
 init-publish:
 	docker context create pokedex-site --docker "host=ssh://root@178.16.129.31"
 	docker context use pokedex-site

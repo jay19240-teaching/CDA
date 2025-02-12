@@ -4,7 +4,6 @@
   "main": "index.js",
   "module": "esnext",
   "scripts": {
-    "start": "node index.js",
     "test": "jest --runInBand"
   },
   "author": "",
