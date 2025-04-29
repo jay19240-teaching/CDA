@@ -84,7 +84,7 @@ onMounted(async () => {
           <span class="material-symbols-outlined nav-bar-items-li-icon">login</span>
           <span>Connexion</span>
         </router-link>
-        <div class="nav-bar-items-li" @click="goto('create')" v-if="userStore.isLogged">
+        <div class="nav-bar-items-li" @click="goto('create')">
           <span class="material-symbols-outlined nav-bar-items-li-icon">add</span>
           <span>Ajouter une créature</span>
         </div>

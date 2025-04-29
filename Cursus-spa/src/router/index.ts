@@ -22,7 +22,7 @@ const router = createRouter({
       props: true,
       beforeEnter: creatureResolver
     },
-    { path: '/create', name: 'create', component: View.Create, meta: { roles: ['ROLE_USER', 'ROLE_ADMIN'] } },
+    { path: '/create', name: 'create', component: View.Create },
     { path: '/edit/:id', name: 'edit', component: View.Edit, meta: { roles: ['ROLE_USER', 'ROLE_ADMIN'] }, props: true },
     { path: '/settings', name: 'settings', component: View.Settings, meta: { roles: ['ROLE_USER', 'ROLE_ADMIN'] } },
     {

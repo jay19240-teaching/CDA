@@ -36,7 +36,7 @@ class CreatureController extends Controller
     {
         $formFields = $request->validated();
         $creature = new Creature();
-        $creature->user_id = Auth::user()->id;
+        $creature->user_id = 1;
         $creature->fill($formFields);
 
         if ($request->file('avatar_blob')) {

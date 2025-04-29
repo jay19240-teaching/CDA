@@ -48,7 +48,7 @@ Route::middleware(['throttle:api'])->group(function () {
 //
 // LOGGED ROUTES
 //
-Route::middleware(['throttle:api', 'auth:sanctum'])->group(function () {
+// Route::middleware(['throttle:api', 'auth:sanctum'])->group(function () {
     Route::controller(CreatureController::class)->prefix('creatures')->group(function () {
         Route::post('/', 'store');
         Route::put('/{creature}', 'update');
@@ -56,4 +56,4 @@ Route::middleware(['throttle:api', 'auth:sanctum'])->group(function () {
     });
 
     Route::get('/user', [AuthController::class, 'user']);
-});
+// });
