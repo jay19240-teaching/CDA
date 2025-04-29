@@ -4,6 +4,8 @@ services:
     build: ./Cursus-api
     ports:
       - 8000:80
+    volumes:
+      - ~/storage:/var/www/app/storage
 
   vue-docker:
     container_name: vue-docker
