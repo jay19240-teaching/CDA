@@ -5,10 +5,10 @@ const Axios = axios.create({
   headers: {
     Accept: 'application/json'
   },
-  // withCredentials: true,
-  // withXSRFToken: true,
-  // xsrfCookieName: 'XSRF-TOKEN',
-  // xsrfHeaderName: 'X-XSRF-TOKEN'
+  withCredentials: true,
+  withXSRFToken: true,
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN'
 });
 
 Axios.interceptors.response.use(response => response, error => {
