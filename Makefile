@@ -17,6 +17,7 @@ publish:
 	docker context use pokedex-site
 	docker-compose down --rmi all --remove-orphans
 	docker system prune -a
+	docker login https://ghcr.io
 	docker compose -f ./docker-stack.yml up -d
 publish-data:
-	docker exec $(shell docker ps --filter "name=^pokedex-laravel-docker" --quiet) bash -c "php artisan migrate:fresh --seed"
+    docker exec $(docker ps --filter "name=pokedex-laravel-docker" -q) sh -c "php artisan migrate:fresh --seed"

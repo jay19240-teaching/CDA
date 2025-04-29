@@ -18,7 +18,7 @@ class CreatureController extends Controller
     private string $imagesPath;
 
     function __construct() {
-        $this->imagesPath = public_path(env('PUBLIC_IMAGES_PATH'));
+        $this->imagesPath = storage_path(env('PUBLIC_IMAGES_PATH'));
     }
 
     public function index()

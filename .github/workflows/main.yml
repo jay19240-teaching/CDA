@@ -32,52 +32,52 @@ jobs:
     - name: Run tests
       run: npm run test
 
-  # build-and-push-image-api-prod:
-  #   needs:
-  #     - tests
-  #   permissions: write-all
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #     - name: Log in to the Container registry
-  #       uses: docker/login-action@v3
-  #       with:
-  #         registry: https://ghcr.io
-  #         username: jay19240-teaching
-  #         password: ${{ secrets.GITHUB_TOKEN }}
-  #     - name: Build and push Docker image
-  #       uses: docker/build-push-action@v6
-  #       with:
-  #         context: ./Cursus-api
-  #         build-args: |
-  #           "MODE=prod"
-  #         push: true
-  #         tags: |
-  #           ghcr.io/jay19240-teaching/cda-api-prod:latest
-  #           ghcr.io/jay19240-teaching/cda-api-prod:${{ github.sha }}
+  build-and-push-image-api-prod:
+    needs:
+      - tests
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: https://ghcr.io
+          username: jay19240-teaching
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./Cursus-api
+          build-args: |
+            "MODE=prod"
+          push: true
+          tags: |
+            ghcr.io/jay19240-teaching/cda-api-prod:latest
+            ghcr.io/jay19240-teaching/cda-api-prod:${{ github.sha }}
 
-  # build-and-push-image-spa-prod:
-  #   needs:
-  #     - tests
-  #   permissions: write-all
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v4
-  #     - name: Log in to the Container registry
-  #       uses: docker/login-action@v3
-  #       with:
-  #         registry: https://ghcr.io
-  #         username: jay19240-teaching
-  #         password: ${{ secrets.GITHUB_TOKEN }}
-  #     - name: Build and push Docker image
-  #       uses: docker/build-push-action@v6
-  #       with:
-  #         context: ./Cursus-spa
-  #         build-args: |
-  #           "MODE=prod"
-  #         push: true
-  #         tags: |
-  #           ghcr.io/jay19240-teaching/cda-spa-prod:latest
-  #           ghcr.io/jay19240-teaching/cda-spa-prod:${{ github.sha }}
+  build-and-push-image-spa-prod:
+    needs:
+      - tests
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: https://ghcr.io
+          username: jay19240-teaching
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./Cursus-spa
+          build-args: |
+            "MODE=prod"
+          push: true
+          tags: |
+            ghcr.io/jay19240-teaching/cda-spa-prod:latest
+            ghcr.io/jay19240-teaching/cda-spa-prod:${{ github.sha }}
